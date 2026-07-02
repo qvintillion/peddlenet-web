@@ -1957,6 +1957,33 @@ io.on('connection', (socket) => {
       // CRITICAL: Broadcast to ALL connections in room (including background)
       io.to(roomId).emit('chat-message', enhancedMessage);
 
+      // Phase 12: fan this message DOWN to relay nodes as a relay-forward so they bridge it
+      // onto their BLE mesh (nord/iPad, etc.). Relays are room-subscribed and DO receive the
+      // chat-message above, but their client only bridges 'relay-forward' events to BLE — a
+      // plain chat-message dead-ends at the relay (the Mac→BLE "M55" loss). Mirror the reverse
+      // direction (relay-forward handler → chat-message broadcast) so both ways bridge.
+      // LOOP GUARD: only fan NON-relayed messages. A message that arrived via relay-forward is
+      // marked relayed=true; re-fanning it would echo it back to relays forever
+      // (project_ws_ble_bridge_loop_msgid). socket.to() also excludes the sending socket.
+      if (!enhancedMessage.relayed && type === 'chat') {
+        const meshJson = JSON.stringify({
+          type: 'chat',
+          msg: enhancedMessage.content,
+          from: enhancedMessage.sender,
+          room: roomId,
+          timestamp: enhancedMessage.timestamp,
+          msgId: enhancedMessage.id,
+          hopCount: 0,
+          maxHops: 5
+        });
+        // Count relay sockets (excluding sender) so we can tell "fired but no relays" from
+        // "guard skipped" in the logs.
+        const relayRoom = io.sockets.adapter.rooms.get('relays');
+        const relayCount = relayRoom ? relayRoom.size : 0;
+        socket.to('relays').emit('relay-forward', { message: meshJson, fromRelay: socket.id });
+        console.log(`📡 [RELAY] fanned chat-message "${enhancedMessage.content}" (msgId=${enhancedMessage.id}) DOWN to ${relayCount} relay socket(s) in room ${roomId}`);
+      }
+
       // Send delivery confirmation
       socket.emit('message-delivered', {
         messageId: enhancedMessage.id,
@@ -2001,6 +2028,20 @@ io.on('connection', (socket) => {
       socket.data.relayRooms = socket.data.relayRooms || new Set();
       socket.data.relayRooms.add(roomId);
       console.log(`📡 [RELAY] ${socket.id} silently subscribed to room ${roomId}`);
+
+      // Replay recent message history to the relay, exactly as join-room does for a normal
+      // client. A relay that (re)subscribes AFTER a message was posted — e.g. it was offline
+      // when the Mac sent, or it only just learned the BLE peer's room — would otherwise never
+      // see that message: relay-forward only fans LIVE messages, so a message already in the
+      // room is missed forever (field-traced: M38/M40 lost when the relay's cell data was
+      // toggled off during the send, then it re-subscribed on reconnect but got no history).
+      // The relay's onRelayForward/history path pushes these down to its BLE peers; the peer
+      // dedups by stable msgId, so a message it already has is harmless.
+      const history = messageStore.has(roomId) ? messageStore.get(roomId).slice(-50) : [];
+      if (history.length > 0) {
+        socket.emit('message-history', history);
+        console.log(`📚 [RELAY] Sent ${history.length} message(s) of history to relay ${socket.id} on subscribe to ${roomId}`);
+      }
     } catch (err) {
       console.error('[RELAY] relay-subscribe error:', err);
     }
