@@ -1957,6 +1957,33 @@ io.on('connection', (socket) => {
       // CRITICAL: Broadcast to ALL connections in room (including background)
       io.to(roomId).emit('chat-message', enhancedMessage);
 
+      // Phase 12: fan this message DOWN to relay nodes as a relay-forward so they bridge it
+      // onto their BLE mesh (nord/iPad, etc.). Relays are room-subscribed and DO receive the
+      // chat-message above, but their client only bridges 'relay-forward' events to BLE — a
+      // plain chat-message dead-ends at the relay (the Mac→BLE "M55" loss). Mirror the reverse
+      // direction (relay-forward handler → chat-message broadcast) so both ways bridge.
+      // LOOP GUARD: only fan NON-relayed messages. A message that arrived via relay-forward is
+      // marked relayed=true; re-fanning it would echo it back to relays forever
+      // (project_ws_ble_bridge_loop_msgid). socket.to() also excludes the sending socket.
+      if (!enhancedMessage.relayed && type === 'chat') {
+        const meshJson = JSON.stringify({
+          type: 'chat',
+          msg: enhancedMessage.content,
+          from: enhancedMessage.sender,
+          room: roomId,
+          timestamp: enhancedMessage.timestamp,
+          msgId: enhancedMessage.id,
+          hopCount: 0,
+          maxHops: 5
+        });
+        // Count relay sockets (excluding sender) so we can tell "fired but no relays" from
+        // "guard skipped" in the logs.
+        const relayRoom = io.sockets.adapter.rooms.get('relays');
+        const relayCount = relayRoom ? relayRoom.size : 0;
+        socket.to('relays').emit('relay-forward', { message: meshJson, fromRelay: socket.id });
+        console.log(`📡 [RELAY] fanned chat-message "${enhancedMessage.content}" (msgId=${enhancedMessage.id}) DOWN to ${relayCount} relay socket(s) in room ${roomId}`);
+      }
+
       // Send delivery confirmation
       socket.emit('message-delivered', {
         messageId: enhancedMessage.id,
