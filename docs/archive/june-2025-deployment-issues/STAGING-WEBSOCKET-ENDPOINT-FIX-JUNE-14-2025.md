@@ -27,7 +27,7 @@ The issue was **NOT** the WebSocket server deployment, but a **URL routing probl
 curl https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/health
 # ✅ {"status":"ok","service":"PeddleNet Signaling Server","version":"1.1.0-admin-enhanced"}
 
-curl -u "th3p3ddl3r:letsmakeatrade" https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/admin/mesh-status
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/admin/mesh-status
 # ✅ {"metrics":{"totalP2PAttempts":0,"successfulP2PConnections":0,...},"connections":[],...}
 
 curl https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/room-stats/test-room

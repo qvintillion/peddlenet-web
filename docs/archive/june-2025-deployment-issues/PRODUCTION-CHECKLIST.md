@@ -71,7 +71,7 @@ npm run deploy:vercel:complete
 #### **Login Flow**
 - [ ] Visit https://peddlenet.app/admin-analytics on mobile
 - [ ] Confirm NO default credentials are visible
-- [ ] Test login with th3p3ddl3r / letsmakeatrade
+- [ ] Test login with REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 - [ ] Verify responsive form layout
 
 #### **Admin Dashboard**

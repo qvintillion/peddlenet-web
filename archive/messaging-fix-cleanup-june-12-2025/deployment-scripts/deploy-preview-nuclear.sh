@@ -223,7 +223,7 @@ if [ -n "$PREVIEW_URL" ]; then
     echo -e "${BLUE}=============================${NC}"
     echo ""
     echo -e "${YELLOW}1. Open: ${PREVIEW_URL}${NC}"
-    echo -e "${YELLOW}2. Sign into th3p3ddl3r@gmail.com${NC}"
+    echo -e "${YELLOW}2. Sign into REDACTED_ADMIN_USER@gmail.com${NC}"
     echo -e "${YELLOW}3. Open browser console (F12)${NC}"
     echo -e "${YELLOW}4. Look for this line:${NC}"
     echo -e "${GREEN}   🌐 Using production HTTP URL: https://peddlenet-websocket-server-preview-433318323150.us-central1.run.app${NC}"

@@ -390,7 +390,7 @@ This document catalogs all UI/UX improvements, analytics features, and frontend 
 
 ### Authentication
 - **Login System**
-  - Username: `th3p3ddl3r`
+  - Username: `REDACTED_ADMIN_USER`
   - Secure password hashing
   - Session token management
   - Environment-based access control

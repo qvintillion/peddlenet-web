@@ -43,8 +43,8 @@ const totalUniqueUsers = activeUniqueUserIds.size; // Accurate count
 **Solution**: Streamlined to single admin level with full access.
 
 **Changes**:
-- **Before**: Basic admin (`th3p3ddl3r`/`letsmakeatrade`) + Super admin (`super_admin`/`clear_and_wipe_2025!`)
-- **After**: Single admin level (`th3p3ddl3r`/`letsmakeatrade`) with full access to all features
+- **Before**: Basic admin (`REDACTED_ADMIN_USER`/`REDACTED_ADMIN_PASS`) + Super admin (`super_admin`/`clear_and_wipe_2025!`)
+- **After**: Single admin level (`REDACTED_ADMIN_USER`/`REDACTED_ADMIN_PASS`) with full access to all features
 
 **Benefits**:
 - ✅ **Simplified authentication** - no more privilege level confusion
@@ -150,7 +150,7 @@ app.post('/admin/broadcast/room', requireAdminAuth, (req, res) => {
 ```javascript
 // Unified admin credentials (simplified from dual-level)
 const ADMIN_CREDENTIALS = {
-  admin: { username: 'th3p3ddl3r', password: 'letsmakeatrade' }
+  admin: { username: 'REDACTED_ADMIN_USER', password: 'REDACTED_ADMIN_PASS' }
 };
 
 // Enhanced room finding with multiple search methods
@@ -190,7 +190,7 @@ const downloadActivityLog = (activities: Activity[]) => {
 ## 🎯 **Admin Dashboard Features (Complete)**
 
 ### **✅ Core Functionality**
-- **🔐 Authentication**: 24-hour persistent sessions (`th3p3ddl3r` / `letsmakeatrade`)
+- **🔐 Authentication**: 24-hour persistent sessions (`REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`)
 - **📊 Real-time Analytics**: Live user/room monitoring with 5-second auto-refresh
 - **📋 Activity Feed**: Real-time activity tracking with CSV export capability
 - **🛡️ Admin Controls**: Full broadcasting, room management, database operations
@@ -247,7 +247,7 @@ const downloadActivityLog = (activities: Activity[]) => {
 
 ### **Access Information**
 - **URL**: `https://peddlenet.app/admin-analytics`
-- **Credentials**: `th3p3ddl3r` / `letsmakeatrade`
+- **Credentials**: `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`
 - **Session Duration**: 24 hours with auto-renewal
 - **Mobile Access**: Full functionality on all mobile devices
 

@@ -167,7 +167,7 @@ if firebase hosting:channel:deploy "$CHANNEL_ID" \
     echo ""
     echo -e "${BLUE}🔍 Debug Steps:${NC}"
     echo -e "${YELLOW}1. Open DevTools Console (F12)${NC}"
-    echo -e "${YELLOW}2. Login with: th3p3ddl3r / letsmakeatrade${NC}"
+    echo -e "${YELLOW}2. Login with: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS${NC}"
     echo -e "${YELLOW}3. Look for '🔧 Environment detection' log${NC}"
     echo -e "${YELLOW}4. Check footer shows correct server and version${NC}"
     echo ""

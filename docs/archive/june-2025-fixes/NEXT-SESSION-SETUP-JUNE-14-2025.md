@@ -37,7 +37,7 @@ npm run deploy:vercel:complete
    - Public rooms display "Open to all"
    
 2. **Admin Dashboard**: `https://peddlenet.app/admin`
-   - Login: th3p3ddl3r / letsmakeatrade
+   - Login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
    - Zero JavaScript errors in console
    - All panels functional and responsive
 

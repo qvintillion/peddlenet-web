@@ -13,7 +13,7 @@ Festival Chat supports multiple deployment platforms:
 
 **Status**: 🟢 **Admin dashboard completely restored and production-ready**  
 **Access**: `https://peddlenet.app/admin-analytics`  
-**Credentials**: Username: `th3p3ddl3r` / Password: `letsmakeatrade`
+**Credentials**: Username: `REDACTED_ADMIN_USER` / Password: `REDACTED_ADMIN_PASS`
 
 **Key Restoration Achievements**:
 - ✅ **Professional Authentication** - 24-hour persistent sessions with secure login
@@ -170,7 +170,7 @@ git push origin main  # Auto-deploys to peddlenet.app
 ```bash
 # After any deployment, verify admin dashboard:
 # 1. Access https://peddlenet.app/admin-analytics
-# 2. Login with: th3p3ddl3r / letsmakeatrade
+# 2. Login with: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 # 3. Verify real-time analytics display
 # 4. Test admin controls (broadcast, clear room)
 # 5. Check mobile responsiveness
@@ -496,7 +496,7 @@ npm run start
 
 # 4. Admin dashboard test (if making admin changes)
 # - Navigate to http://localhost:3000/admin-analytics
-# - Login with: th3p3ddl3r / letsmakeatrade
+# - Login with: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 # - Verify dashboard loads and connects
 # - Test admin controls functionality
 ```
@@ -690,14 +690,14 @@ npm run staging:unified [channel-name]  # 💥 GUARANTEED to work
 #### **"Admin dashboard showing login form but not connecting"**
 ```bash
 # ✅ FIXED: Authentication system restored
-# Verify: Login with th3p3ddl3r / letsmakeatrade
+# Verify: Login with REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 # Should see: Dashboard loads with real-time analytics
 
 # If still having issues:
 # 1. Check browser console for authentication errors
 # 2. Verify WebSocket server URL in network tab
 # 3. Test API endpoints manually:
-curl -u th3p3ddl3r:letsmakeatrade https://[server-url]/admin/analytics
+curl -u REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS https://[server-url]/admin/analytics
 ```
 
 #### **"Admin dashboard loads but shows no data"**
@@ -707,7 +707,7 @@ curl https://[cloud-run-url]/admin/analytics
 # Should return: Authentication required (401) - this is correct
 
 # With authentication:
-curl -u th3p3ddl3r:letsmakeatrade https://[cloud-run-url]/admin/analytics
+curl -u REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS https://[cloud-run-url]/admin/analytics
 # Should return: JSON with dashboard data
 
 # If 404: Check universal server includes admin endpoints
@@ -831,7 +831,7 @@ npm run deploy:firebase:complete
 
 ### **🎪 Admin Dashboard Checklist** ✅ **RESTORED**
 - [ ] Access: `https://peddlenet.app/admin-analytics` loads correctly
-- [ ] Login: Credentials `th3p3ddl3r` / `letsmakeatrade` work
+- [ ] Login: Credentials `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS` work
 - [ ] Dashboard: Real-time analytics display (users, rooms, messages)
 - [ ] Controls: Admin functions work (broadcast, clear room, wipe database)
 - [ ] Mobile: Responsive design functions on phones/tablets
@@ -975,7 +975,7 @@ The deployment system is production-ready with **universal server architecture**
 
 For production: Use `npm run deploy:firebase:complete` for backend changes.
 
-**Admin Dashboard Access**: `https://peddlenet.app/admin-analytics` (Credentials: `th3p3ddl3r` / `letsmakeatrade`)
+**Admin Dashboard Access**: `https://peddlenet.app/admin-analytics` (Credentials: `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`)
 
 ## 📚 Related Documentation
 

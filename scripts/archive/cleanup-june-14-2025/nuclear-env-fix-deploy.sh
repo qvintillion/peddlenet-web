@@ -190,7 +190,7 @@ if firebase hosting:channel:deploy "$CHANNEL_ID" \
     echo -e "${YELLOW}1. Visit: ${PREVIEW_URL}/admin-analytics${NC}"
     echo -e "${YELLOW}2. Open Inspector Network tab${NC}"
     echo -e "${YELLOW}3. Hard refresh (Cmd+Shift+R)${NC}"
-    echo -e "${YELLOW}4. Login: th3p3ddl3r / letsmakeatrade${NC}"
+    echo -e "${YELLOW}4. Login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS${NC}"
     echo -e "${YELLOW}5. Check footer version (should be ${UNIQUE_VERSION})${NC}"
     echo -e "${YELLOW}6. Verify headers show X-Version: ${UNIQUE_VERSION}${NC}"
     echo ""

@@ -376,7 +376,7 @@ socket.on('database-wiped', (data) => {
 6. **Verify users disconnected** and receive proper notifications
 
 ### **✅ Admin Dashboard Integration**
-1. **Login to admin dashboard** (`th3p3ddl3r` / `letsmakeatrade`)
+1. **Login to admin dashboard** (`REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`)
 2. **Test room clear** with real room codes
 3. **Test database wipe** with confirmation dialog
 4. **Verify immediate updates** in all dashboard metrics

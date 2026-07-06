@@ -87,7 +87,7 @@ if [ -n "$PREVIEW_URL" ]; then
     
     echo ""
     echo -e "${BLUE}💡 Manual Access Instructions:${NC}"
-    echo -e "${YELLOW}1. Open Chrome with th3p3ddl3r@gmail.com profile${NC}"
+    echo -e "${YELLOW}1. Open Chrome with REDACTED_ADMIN_USER@gmail.com profile${NC}"
     echo -e "${YELLOW}2. Navigate to: ${PREVIEW_URL}${NC}"
     echo -e "${YELLOW}3. URL is copied to clipboard (Cmd+V to paste)${NC}"
 else

@@ -35,7 +35,7 @@ NEXT_PUBLIC_SIGNALING_SERVER=wss://peddlenet-websocket-server-hfttiarlja-uc.a.ru
 
 ### Admin Dashboard Features Working
 
-✅ **Authentication**: th3p3ddl3r / letsmakeatrade  
+✅ **Authentication**: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS  
 ✅ **Real-time Analytics**: User/room counts, message stats  
 ✅ **Admin Controls**: Broadcast, room clearing, database wipe  
 ✅ **Detailed Views**: User management, room management  

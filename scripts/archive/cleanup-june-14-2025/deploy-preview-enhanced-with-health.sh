@@ -350,7 +350,7 @@ if firebase hosting:channel:deploy "$CHANNEL_ID" \
     echo -e "${BLUE}🎯 ENHANCED VERIFICATION CHECKLIST:${NC}"
     echo -e "${YELLOW}1. Visit: ${PREVIEW_URL}${NC}"
     echo -e "${YELLOW}2. Admin: ${PREVIEW_URL}/admin-analytics${NC}"
-    echo -e "${YELLOW}3. Login: th3p3ddl3r / letsmakeatrade${NC}"
+    echo -e "${YELLOW}3. Login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS${NC}"
     echo -e "${YELLOW}4. Environment should show: 'staging'${NC}"
     echo -e "${YELLOW}5. Server should show: 'Connected'${NC}"
     echo -e "${YELLOW}6. Version should show: latest version${NC}"

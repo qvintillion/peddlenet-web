@@ -148,7 +148,7 @@ curl https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/
 # Should show: "detected": "staging"
 
 # Check admin analytics
-curl -u "th3p3ddl3r:letsmakeatrade" \
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" \
   https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/admin/analytics
 # Should show: "environment": "staging"
 ```

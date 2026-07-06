@@ -72,7 +72,7 @@ The mesh panel 404 error has been completely resolved and the debug panel is now
 
 #### **1. Admin Dashboard Signs**
 - **URL**: `http://localhost:3000/admin-analytics`
-- **Login**: `th3p3ddl3r` / `letsmakeatrade`
+- **Login**: `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`
 - **Look for**: Mesh Network Status panel at top (should show metrics, not loading)
 
 #### **2. Console Success Messages**

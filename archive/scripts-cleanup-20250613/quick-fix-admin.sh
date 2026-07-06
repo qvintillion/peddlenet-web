@@ -40,7 +40,7 @@ Fixed admin dashboard 404 errors by creating proper Vercel API routes and updati
 • Proper CORS headers for all admin API routes
 
 🛡️ AUTHENTICATION:
-• All admin routes require Basic Auth (th3p3ddl3r / letsmakeatrade)
+• All admin routes require Basic Auth (REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS)
 • Session management preserved for frontend
 • Environment variable support for custom credentials
 • Proper 401 responses with WWW-Authenticate headers
@@ -70,7 +70,7 @@ if [ $? -eq 0 ]; then
         echo ""
         echo "✅ Admin Dashboard Working:"
         echo "• Navigate to: https://peddlenet.app/admin-analytics"
-        echo "• Login: th3p3ddl3r / letsmakeatrade"
+        echo "• Login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS"
         echo "• Dashboard should load without 404 errors"
         echo ""
         echo "✅ Room Creation Working:"

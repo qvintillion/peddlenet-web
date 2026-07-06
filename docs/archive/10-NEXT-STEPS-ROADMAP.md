@@ -20,7 +20,7 @@ Festival Chat has reached **production stability** with mobile-optimized connect
 - **✅ Frontend authentication**: Built-in form authentication working correctly
 - **✅ Health endpoints**: `/health`, `/stability` providing comprehensive server metrics
 - **✅ Complete admin access**: Full dashboard functionality operational with admin credentials
-- **Credentials**: Username: `th3p3ddl3r`, Password: `letsmakeatrade`
+- **Credentials**: Username: `REDACTED_ADMIN_USER`, Password: `REDACTED_ADMIN_PASS`
 - **Status**: FULLY OPERATIONAL - Admin dashboard ready for production use
 
 **Why Vercel?**
@@ -1712,7 +1712,7 @@ npm run deploy:firebase:quick          # Deploy to preview channel
    - Add HTTP Basic Auth headers to all admin API calls
    - Implement login form or browser basic auth prompt
    - Handle 401 responses and re-authentication
-   - Test with credentials: `th3p3ddl3r` / `letsmakeatrade`
+   - Test with credentials: `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS`
    - Fix activity feed refreshing on page reload (should persist history)
 3. **Test admin dashboard data flow** once API issues resolved
 4. **Archive GitHub Pages workflow** (optional cleanup)
@@ -1762,8 +1762,8 @@ curl -i https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/analyti
 curl -i https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/activity
 
 # Test with authentication
-curl -i -u th3p3ddl3r:letsmakeatrade https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/analytics
-curl -i -u th3p3ddl3r:letsmakeatrade https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/activity
+curl -i -u REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/analytics
+curl -i -u REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/activity
 
 # Check server environment detection
 curl -i https://peddlenet-websocket-server-hfttiarlja-uc.a.run.app/admin/info

@@ -194,7 +194,7 @@ interface Room {
 - [ ] CPU should be under 30% and stable
 
 ### **Admin Dashboard**
-- [ ] `http://localhost:3000/admin-analytics` - Login with th3p3ddl3r/letsmakeatrade
+- [ ] `http://localhost:3000/admin-analytics` - Login with REDACTED_ADMIN_USER/REDACTED_ADMIN_PASS
 - [ ] Click "Active Users" metric - Should show real user data
 - [ ] Click "Active Rooms" metric - Should show real room data  
 - [ ] Test user removal functionality

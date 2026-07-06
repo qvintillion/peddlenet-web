@@ -54,7 +54,7 @@ npm run deploy:vercel:complete
    - ✅ Clean browser console
 
 2. **Admin Dashboard Test**: https://peddlenet.app/admin
-   - ✅ Login works: th3p3ddl3r / letsmakeatrade
+   - ✅ Login works: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
    - ✅ No JavaScript destructuring errors
    - ✅ Mesh networking panel displays
    - ✅ All panels functional

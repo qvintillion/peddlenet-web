@@ -196,7 +196,7 @@ if [ -n "$PREVIEW_URL" ]; then
     echo ""
     echo -e "${YELLOW}Step 1: Open Chrome (or any browser)${NC}"
     echo -e "${YELLOW}Step 2: Go to accounts.google.com${NC}"
-    echo -e "${YELLOW}Step 3: Sign into th3p3ddl3r@gmail.com${NC}"
+    echo -e "${YELLOW}Step 3: Sign into REDACTED_ADMIN_USER@gmail.com${NC}"
     echo -e "${YELLOW}Step 4: In the SAME browser tab/window:${NC}"
     echo -e "${YELLOW}        - Press Cmd+V (URL is in clipboard)${NC}"
     echo -e "${YELLOW}        - OR manually type: ${PREVIEW_URL}${NC}"
@@ -205,7 +205,7 @@ if [ -n "$PREVIEW_URL" ]; then
     echo ""
     echo -e "${BLUE}📱 MOBILE TESTING:${NC}"
     echo -e "${YELLOW}• Copy URL to phone (AirDrop, text, etc.)${NC}"
-    echo -e "${YELLOW}• Make sure th3p3ddl3r@gmail.com is signed into mobile browser${NC}"
+    echo -e "${YELLOW}• Make sure REDACTED_ADMIN_USER@gmail.com is signed into mobile browser${NC}"
     echo -e "${YELLOW}• Open URL in mobile browser${NC}"
     echo ""
     

@@ -269,7 +269,7 @@ Includes comprehensive changelog with:
 ### ✅ Production URLs
 - **Live Site:** https://peddlenet.app
 - **Admin Dashboard:** https://peddlenet.app/admin-analytics
-- **Credentials:** th3p3ddl3r / letsmakeatrade
+- **Credentials:** REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 
 ---
 
