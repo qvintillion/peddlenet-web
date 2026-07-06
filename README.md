@@ -1,15 +1,17 @@
-# 🎪 Festival Chat - PeddleNet
+# 🎪 PeddleNet Web
 
-**Version:** 4.1-websocket-only (Phase 2 Complete - October 2025)
+**Version:** 4.3.5+relay (July 2026) — web app + the WebSocket backbone for the native PeddleNet mesh apps. *(Repo renamed from `festival-chat` / `peddlenet` to `peddlenet-web`, July 2026.)*
 
-A real-time chat application designed for festivals and events with WebSocket-only architecture, instant QR code connections, mobile-first design, and comprehensive admin dashboard.
+A real-time chat application for festivals and events (Next.js on Vercel → [peddlenet.app](https://peddlenet.app), Socket.IO server on Google Cloud Run), with instant QR code connections, mobile-first design, and an admin dashboard.
+
+**Since 2026 this server is also the backbone for the native apps** ([`peddlenet-app`](https://github.com/qvintillion/peddlenet-app)): phones form an offline Bluetooth LE mesh, and any phone with internet bridges the mesh into these rooms via **relay mode** — chat, presence, rosters, and message history flow both ways between BLE-only users and web users.
 
 ## 📖 Current State
 
-**Status:** ✅ Production Ready - Phase 2 Complete (P2P removed, WebSocket-only)
+**Status:** ✅ Production. WebSocket-only chat (P2P removed in Phase 2) + the relay bridge protocol (Phase 12, 2026).
 
-For detailed current state, architecture, and recent changes, see:
-👉 **[docs/CURRENT-STATE-OCT-2025.md](docs/CURRENT-STATE-OCT-2025.md)**
+- 📡 **[docs/RELAY-PROTOCOL.md](docs/RELAY-PROTOCOL.md)** — how native mesh relays bridge into this server (events, in-memory structures, deploy gotchas)
+- 📜 [docs/CURRENT-STATE-OCT-2025.md](docs/CURRENT-STATE-OCT-2025.md) — the pre-relay web-app state (historical but still accurate for the web-client architecture)
 
 ## 🚀 Quick Start
 
