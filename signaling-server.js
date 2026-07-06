@@ -1886,7 +1886,9 @@ io.on('connection', (socket) => {
 
       // Emit peer-joined for compatibility
       if (!isBackground) {
-        socket.to(roomId).emit('peer-joined', { peerId, displayName });
+        // roomId included so a multi-room RELAY subscriber can attribute the event
+        // (presence-down bridging, 07-06); web clients ignore the extra field.
+        socket.to(roomId).emit('peer-joined', { peerId, displayName, roomId });
       }
 
       // Send current peers for compatibility
@@ -2029,6 +2031,23 @@ io.on('connection', (socket) => {
       socket.data.relayRooms.add(roomId);
       console.log(`📡 [RELAY] ${socket.id} silently subscribed to room ${roomId}`);
 
+      // Presence-down bridging (07-06): give the relay the CURRENT roster of real
+      // WS users in the room so it can bridge web presence to its BLE-only peers.
+      // Deltas thereafter ride the peer-joined/peer-left broadcasts the relay now
+      // receives as a room member. Relayed virtual entries (relayPresence) are
+      // EXCLUDED — those ARE the BLE peers, already visible over BLE.
+      try {
+        const userKeys = rooms.get(roomId) || new Set();
+        const users = [...userKeys]
+          .map((k) => activeUsers.get(k))
+          .filter((u) => u && u.displayName)
+          .map((u) => u.displayName);
+        socket.emit('relay-roster', { roomId, users });
+        console.log(`📡 [RELAY] roster snapshot for ${roomId} → ${socket.id}: [${users.join(', ')}]`);
+      } catch (rosterErr) {
+        console.error('[RELAY] roster snapshot error:', rosterErr);
+      }
+
       // Replay recent message history to the relay, exactly as join-room does for a normal
       // client. A relay that (re)subscribes AFTER a message was posted — e.g. it was offline
       // when the Mac sent, or it only just learned the BLE peer's room — would otherwise never
@@ -2167,6 +2186,50 @@ io.on('connection', (socket) => {
   // - request-mesh-stats
   // ===== END PHASE 2 =====
 
+  // Explicit participant leave WITHOUT a socket disconnect. Web clients "leave" by
+  // disconnecting (page navigation), so room cleanup only lived in the disconnect
+  // handler — but an Android RELAY that exits the room UI must keep its socket alive
+  // to continue bridging (silent-relay). Without this event the relay's participant
+  // registration lingered in activeUsers/rooms forever, so peers kept counting it as
+  // an active room member ("2 active" incl. a swiped-away relay). Mirrors the user
+  // portion of the disconnect cleanup; deliberately does NOT touch relay-presence
+  // entries, socket.data.isRelay, or a relay's room-channel subscription (the relay
+  // still needs the fan-out for bridging).
+  socket.on('leave-room', () => {
+    try {
+      const user = findUserBySocketId(socket.id);
+      if (!user) return;
+      const { userKey, userData } = user;
+      const roomId = userData.currentRoom;
+      if (!roomId) return;
+
+      removeUserFromRoom(userKey);
+
+      const userCount = getRoomUserCount(roomId);
+      socket.to(roomId).emit('user-left', {
+        peerId: userData.displayName,
+        displayName: userData.displayName,
+        userCount
+      });
+      socket.to(roomId).emit('peer-left', {
+        peerId: userData.displayName,
+        displayName: userData.displayName,
+        roomId
+      });
+      addActivityLog('user-left', {
+        displayName: userData.displayName,
+        roomId,
+        userCount
+      }, '👋');
+      // Only non-relay sockets drop the room channel; a relay keeps receiving the
+      // room's fan-out to bridge it onward.
+      if (!socket.data.isRelay) socket.leave(roomId);
+      console.log(`👋 User ${userData.displayName} left room ${roomId} (explicit leave-room, socket stays). Room now has ${userCount} users`);
+    } catch (error) {
+      console.error('❌ Error in leave-room:', error);
+    }
+  });
+
   socket.on('disconnect', () => {
     try {
       const connectionDuration = Date.now() - connectionHealth.connectedAt;
@@ -2210,10 +2273,11 @@ io.on('connection', (socket) => {
             userCount
           });
 
-          // Also emit peer-left for compatibility
+          // Also emit peer-left for compatibility (roomId for relay roster attribution)
           socket.to(roomId).emit('peer-left', {
             peerId: userData.displayName,
-            displayName: userData.displayName
+            displayName: userData.displayName,
+            roomId
           });
 
           // Log activity
