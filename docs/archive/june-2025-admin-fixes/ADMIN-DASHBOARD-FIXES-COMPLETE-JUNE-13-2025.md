@@ -216,8 +216,8 @@ npm run dev:mobile
 open http://localhost:3000/admin-analytics
 
 # Login credentials:
-# Username: th3p3ddl3r
-# Password: letsmakeatrade
+# Username: REDACTED_ADMIN_USER
+# Password: REDACTED_ADMIN_PASS
 ```
 
 ### **3. Features to Test:**

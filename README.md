@@ -70,7 +70,7 @@ npm run dev
 ### **✅ PRODUCTION-READY FESTIVAL MANAGEMENT**
 
 **Access:** `https://peddlenet.app/admin-analytics`  
-**Credentials:** Username: `th3p3ddl3r` / Password: `letsmakeatrade`
+**Credentials:** Username: `REDACTED_ADMIN_USER` / Password: `REDACTED_ADMIN_PASS`
 
 ### **🔥 Complete Feature Set**
 - **🔐 Professional Authentication** - 24-hour persistent sessions with secure login/logout
@@ -123,7 +123,7 @@ npm run dev
 
 ### 📊 Admin Dashboard (Fully Restored - June 13, 2025)
 - **URL:** `/admin-analytics` on any deployed environment
-- **Authentication:** `th3p3ddl3r` / `letsmakeatrade` with 24-hour session persistence
+- **Authentication:** `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS` with 24-hour session persistence
 - **Features:** Real-time analytics, user management, room control, broadcast messaging, database operations
 - **Session Management:** Persistent across page refreshes using localStorage with automatic cleanup
 - **Activity Tracking:** Retains last 100 activity records with manual clear functionality
@@ -223,7 +223,7 @@ vercel --prod --yes               # Production deployment to Vercel
 
 # 📊 Admin Dashboard ✅ FULLY RESTORED (Available on all deployments)
 # Access at: https://your-domain.com/admin-analytics
-# Credentials: th3p3ddl3r / letsmakeatrade
+# Credentials: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS
 # Features: Real-time analytics, user management, session persistence, admin controls
 
 # Standard development
@@ -479,7 +479,7 @@ Room codes provide memorable alternatives to QR scanning with enterprise-grade r
 
 ### Admin Dashboard ✅ **ALL TESTS PASSING**
 - [x] `/admin-analytics` loads without errors
-- [x] Login with `th3p3ddl3r` / `letsmakeatrade` works
+- [x] Login with `REDACTED_ADMIN_USER` / `REDACTED_ADMIN_PASS` works
 - [x] Session persists across page refreshes (24-hour localStorage)
 - [x] Real-time analytics display correctly (users, rooms, messages)
 - [x] Activity feed shows live updates and retains 100 records

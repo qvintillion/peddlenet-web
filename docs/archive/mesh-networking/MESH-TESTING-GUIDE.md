@@ -144,8 +144,8 @@ This floating widget shows:
 Visit: `http://localhost:3000/admin-analytics`
 
 **Login Credentials:**
-- Username: `th3p3ddl3r`
-- Password: `letsmakeatrade`
+- Username: `REDACTED_ADMIN_USER`
+- Password: `REDACTED_ADMIN_PASS`
 
 ## 🚨 Troubleshooting
 

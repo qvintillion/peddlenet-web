@@ -8,7 +8,7 @@
 
 ### ✅ **What Was Wrong:**
 - **Backend Authentication**: ✅ Working correctly (returns 401 without auth)
-- **Backend Credentials**: ✅ Valid (`th3p3ddl3r:letsmakeatrade` works)
+- **Backend Credentials**: ✅ Valid (`REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS` works)
 - **Frontend Authentication**: ❌ **NOT SENDING AUTH HEADERS** ← This was the issue
 
 ### 🔧 **Solution Implemented:**
@@ -17,8 +17,8 @@
 ```typescript
 // Authentication credentials for production
 const ADMIN_CREDENTIALS = {
-  username: 'th3p3ddl3r',
-  password: 'letsmakeatrade'
+  username: 'REDACTED_ADMIN_USER',
+  password: 'REDACTED_ADMIN_PASS'
 };
 
 // Helper function to make authenticated API calls

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 🎪 Festival Chat - Chrome Profile Browser Opener (Enhanced)
-# Opens URLs in the correct Chrome profile for th3p3ddl3r@gmail.com
+# Opens URLs in the correct Chrome profile for REDACTED_ADMIN_USER@gmail.com
 
 # Colors for output
 RED='\033[0;31m'
@@ -36,14 +36,14 @@ CHROME_PROFILES_DIR="$HOME/Library/Application Support/Google/Chrome"
 
 echo -e "${BLUE}🔍 Searching for Chrome profiles...${NC}"
 
-# Function to find profile with th3p3ddl3r@gmail.com
+# Function to find profile with REDACTED_ADMIN_USER@gmail.com
 find_target_profile() {
     if [ ! -d "$CHROME_PROFILES_DIR" ]; then
         echo -e "${YELLOW}⚠️  Chrome profiles directory not found${NC}"
         return 1
     fi
     
-    # Look for profiles containing th3p3ddl3r@gmail.com references
+    # Look for profiles containing REDACTED_ADMIN_USER@gmail.com references
     for profile_dir in "$CHROME_PROFILES_DIR"/*/; do
         if [ -d "$profile_dir" ]; then
             profile_name=$(basename "$profile_dir")
@@ -56,7 +56,7 @@ find_target_profile() {
             # Check if this profile has preferences mentioning our email
             preferences_file="$profile_dir/Preferences"
             if [ -f "$preferences_file" ]; then
-                if grep -q "th3p3ddl3r@gmail.com" "$preferences_file" 2>/dev/null; then
+                if grep -q "REDACTED_ADMIN_USER@gmail.com" "$preferences_file" 2>/dev/null; then
                     echo -e "${GREEN}✅ Found target profile: $profile_name${NC}"
                     echo "$profile_name"
                     return 0
@@ -107,7 +107,7 @@ TARGET_PROFILE=$(find_target_profile)
 
 if [ -n "$TARGET_PROFILE" ]; then
     echo -e "${GREEN}🎯 Opening URL in profile: $TARGET_PROFILE${NC}"
-    echo -e "${BLUE}📧 Account: th3p3ddl3r@gmail.com${NC}"
+    echo -e "${BLUE}📧 Account: REDACTED_ADMIN_USER@gmail.com${NC}"
     echo -e "${BLUE}🔗 URL: $URL${NC}"
     
     # Open Chrome with specific profile
@@ -115,7 +115,7 @@ if [ -n "$TARGET_PROFILE" ]; then
     
     echo -e "${GREEN}✅ Chrome opened with target profile${NC}"
 else
-    echo -e "${YELLOW}⚠️  Could not find profile for th3p3ddl3r@gmail.com${NC}"
+    echo -e "${YELLOW}⚠️  Could not find profile for REDACTED_ADMIN_USER@gmail.com${NC}"
     echo ""
     
     list_profiles_with_info
@@ -123,7 +123,7 @@ else
     
     echo ""
     echo -e "${BLUE}🤔 Options:${NC}"
-    echo -e "${YELLOW}1. Sign into th3p3ddl3r@gmail.com in Chrome and try again${NC}"
+    echo -e "${YELLOW}1. Sign into REDACTED_ADMIN_USER@gmail.com in Chrome and try again${NC}"
     echo -e "${YELLOW}2. Choose a profile manually (Default is usually #1)${NC}"
     echo -e "${YELLOW}3. Let script try Default profile${NC}"
     echo ""
@@ -166,8 +166,8 @@ fi
 
 echo ""
 echo -e "${BLUE}💡 If you're still asked to sign in:${NC}"
-echo -e "${YELLOW}1. Make sure th3p3ddl3r@gmail.com is signed into this Chrome profile${NC}"
+echo -e "${YELLOW}1. Make sure REDACTED_ADMIN_USER@gmail.com is signed into this Chrome profile${NC}"
 echo -e "${YELLOW}2. Check if you have multiple Google accounts and switch to the right one${NC}"
-echo -e "${YELLOW}3. Try signing out and back in to th3p3ddl3r@gmail.com in Chrome${NC}"
+echo -e "${YELLOW}3. Try signing out and back in to REDACTED_ADMIN_USER@gmail.com in Chrome${NC}"
 echo ""
 echo -e "${PURPLE}🎪 URL opened in Chrome!${NC}"

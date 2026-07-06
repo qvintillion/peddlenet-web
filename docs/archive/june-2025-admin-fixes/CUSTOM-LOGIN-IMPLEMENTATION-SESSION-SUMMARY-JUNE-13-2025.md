@@ -41,8 +41,8 @@
 ### **Login Process:**
 1. Navigate to: `https://peddlenet.app/admin-analytics`
 2. Enter credentials in custom form:
-   - **Username**: `th3p3ddl3r`
-   - **Password**: `letsmakeatrade`
+   - **Username**: `REDACTED_ADMIN_USER`
+   - **Password**: `REDACTED_ADMIN_PASS`
 3. Click "Login to Admin Dashboard"
 4. Access full admin functionality
 5. Use logout button when finished

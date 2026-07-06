@@ -66,7 +66,7 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "✅ Production Testing URLs:"
     echo "   Homepage: https://peddlenet.app (should have clean console)"
-    echo "   Admin: https://peddlenet.app/admin (login: th3p3ddl3r / letsmakeatrade)"
+    echo "   Admin: https://peddlenet.app/admin (login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS)"
     echo ""
     echo "🎪 Festival Chat is now LIVE in production! 🎪"
 else

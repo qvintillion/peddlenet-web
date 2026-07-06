@@ -116,7 +116,7 @@ if firebase hosting:channel:deploy "$CHANNEL_ID" \
     echo ""
     echo -e "${BLUE}🎯 DEBUG CHECKLIST:${NC}"
     echo -e "${YELLOW}1. Visit: ${PREVIEW_URL}/admin-analytics${NC}"
-    echo -e "${YELLOW}2. Login: th3p3ddl3r / letsmakeatrade${NC}"
+    echo -e "${YELLOW}2. Login: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS${NC}"
     echo -e "${YELLOW}3. Check footer version (should be v4.5.0-env-fix)${NC}"
     echo -e "${YELLOW}4. Check console for '🔧 Environment detection' logs${NC}"
     echo -e "${YELLOW}5. Verify environment shows 'staging' not 'production'${NC}"

@@ -160,8 +160,8 @@ const fetchDashboardData = async () => {
 - **Production**: `https://peddlenet.app/admin-analytics` ✅ Working
 
 ### **Login Credentials**
-- **Username**: `th3p3ddl3r`
-- **Password**: `letsmakeatrade`
+- **Username**: `REDACTED_ADMIN_USER`
+- **Password**: `REDACTED_ADMIN_PASS`
 
 ### **Session Features**
 - **24-hour persistence** - No constant re-authentication

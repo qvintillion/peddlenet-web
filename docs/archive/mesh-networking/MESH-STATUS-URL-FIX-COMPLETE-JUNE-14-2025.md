@@ -12,7 +12,7 @@ After thorough debugging, we discovered the WebSocket server was working perfect
 
 ```bash
 # ✅ WebSocket server endpoints working correctly:
-curl -u "th3p3ddl3r:letsmakeatrade" https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/admin/mesh-status
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/admin/mesh-status
 # Response: {"metrics":{"totalP2PAttempts":0,"successfulP2PConnections":0,...},"connections":[],...}
 
 curl https://peddlenet-websocket-server-staging-hfttiarlja-uc.a.run.app/health  

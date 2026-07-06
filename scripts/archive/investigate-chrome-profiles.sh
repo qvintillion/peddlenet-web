@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 🔍 Chrome Profile Investigator
-# Let's find out exactly what Chrome profiles you have and which one has th3p3ddl3r@gmail.com
+# Let's find out exactly what Chrome profiles you have and which one has REDACTED_ADMIN_USER@gmail.com
 
 # Colors for output
 RED='\033[0;31m'
@@ -45,7 +45,7 @@ get_profile_info() {
         if [ -n "$emails" ]; then
             echo -e "  ${GREEN}📧 Found emails:${NC}"
             while IFS= read -r email; do
-                if [ "$email" = "th3p3ddl3r@gmail.com" ]; then
+                if [ "$email" = "REDACTED_ADMIN_USER@gmail.com" ]; then
                     echo -e "    ${GREEN}🎯 $email (TARGET FOUND!)${NC}"
                 else
                     echo -e "    ${BLUE}   $email${NC}"
@@ -100,12 +100,12 @@ fi
 
 echo -e "${PURPLE}💡 Recommendations:${NC}"
 echo -e "${YELLOW}1. Look for the profile marked 'TARGET FOUND!' above${NC}"
-echo -e "${YELLOW}2. If no target found, check which profile you actually use for th3p3ddl3r@gmail.com${NC}"
-echo -e "${YELLOW}3. You might need to sign into th3p3ddl3r@gmail.com in Chrome first${NC}"
+echo -e "${YELLOW}2. If no target found, check which profile you actually use for REDACTED_ADMIN_USER@gmail.com${NC}"
+echo -e "${YELLOW}3. You might need to sign into REDACTED_ADMIN_USER@gmail.com in Chrome first${NC}"
 echo -e "${YELLOW}4. Or specify a different profile manually${NC}"
 
 echo ""
 echo -e "${BLUE}🚀 Next steps:${NC}"
 echo -e "${YELLOW}• If target found: The script should work automatically${NC}"
-echo -e "${YELLOW}• If not found: Sign into th3p3ddl3r@gmail.com in Chrome, then run this again${NC}"
+echo -e "${YELLOW}• If not found: Sign into REDACTED_ADMIN_USER@gmail.com in Chrome, then run this again${NC}"
 echo -e "${YELLOW}• Alternative: Use 'npm run preview:open <url>' to test profile opening${NC}"

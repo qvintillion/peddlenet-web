@@ -2,7 +2,7 @@
 
 **Problem Solved**: Chrome profile detection found no signed-in Google accounts, causing sign-in prompts.
 
-**Solution**: Simple deployment + manual browser setup with th3p3ddl3r@gmail.com.
+**Solution**: Simple deployment + manual browser setup with REDACTED_ADMIN_USER@gmail.com.
 
 ## 🚀 **Quick Start (Recommended)**
 
@@ -38,7 +38,7 @@ https://festival-chat-peddlenet--simple-20250611-1430.web.app
 
 Step 1: Open Chrome (or any browser)
 Step 2: Go to accounts.google.com
-Step 3: Sign into th3p3ddl3r@gmail.com
+Step 3: Sign into REDACTED_ADMIN_USER@gmail.com
 Step 4: In the SAME browser tab/window:
         - Press Cmd+V (URL is in clipboard)
         - OR manually type: [preview-url]
@@ -56,7 +56,7 @@ npm run preview:simple test-working-solution
 ### **2. Access Preview**
 1. **Open Chrome** (or Safari, Firefox - any browser)
 2. **Go to `accounts.google.com`**
-3. **Sign into `th3p3ddl3r@gmail.com`**
+3. **Sign into `REDACTED_ADMIN_USER@gmail.com`**
 4. **Press `Cmd+V`** (URL is auto-copied) or paste manually
 5. **Preview loads immediately** - no sign-in prompt!
 
@@ -76,7 +76,7 @@ npm run preview:simple mobile-test
 # Then:
 # 1. Send URL to your phone (AirDrop, text, etc.)
 # 2. Open mobile browser
-# 3. Make sure th3p3ddl3r@gmail.com is signed into Google
+# 3. Make sure REDACTED_ADMIN_USER@gmail.com is signed into Google
 # 4. Open the preview URL
 # 5. Test QR code scanning, notifications, etc.
 ```
@@ -131,7 +131,7 @@ npm run dev:mobile
 # 3. Deploy preview for testing
 npm run preview:simple feature-test
 
-# 4. Access in browser with th3p3ddl3r@gmail.com
+# 4. Access in browser with REDACTED_ADMIN_USER@gmail.com
 # (URL auto-copied, just paste in signed-in browser)
 
 # 5. Test on mobile
@@ -148,4 +148,4 @@ No more Chrome profile detection issues. No more sign-in prompts. Just:
 
 ---
 
-**🎪 Firebase preview channels now work reliably with th3p3ddl3r@gmail.com!**
+**🎪 Firebase preview channels now work reliably with REDACTED_ADMIN_USER@gmail.com!**

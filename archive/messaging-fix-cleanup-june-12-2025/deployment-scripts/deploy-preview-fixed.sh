@@ -168,7 +168,7 @@ if [ -n "$PREVIEW_URL" ]; then
     echo -e "${PURPLE}🔐 HOW TO ACCESS:${NC}"
     echo -e "${BLUE}===============${NC}"
     echo ""
-    echo -e "${YELLOW}1. Open browser and sign into th3p3ddl3r@gmail.com${NC}"
+    echo -e "${YELLOW}1. Open browser and sign into REDACTED_ADMIN_USER@gmail.com${NC}"
     echo -e "${YELLOW}2. Paste URL: ${PREVIEW_URL}${NC}"
     echo -e "${YELLOW}3. Open browser console (F12) to verify connection${NC}"
     echo -e "${YELLOW}4. Look for: 'Using production HTTP URL: https://peddlenet-websocket-server-preview-433318323150.us-central1.run.app'${NC}"

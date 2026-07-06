@@ -46,7 +46,7 @@ const isProduction = () => {
 // Only show credentials in development
 {!isProduction() && (
   <div className="mt-6 text-center text-sm text-gray-400">
-    <p>Default credentials: th3p3ddl3r / letsmakeatrade</p>
+    <p>Default credentials: REDACTED_ADMIN_USER / REDACTED_ADMIN_PASS</p>
   </div>
 )}
 ```

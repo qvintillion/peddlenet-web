@@ -27,8 +27,8 @@ The admin analytics dashboard has been completely restored to full functionality
 - **Production**: `https://peddlenet.app/admin-analytics`
 
 ### **Login Credentials**
-- **Username**: `th3p3ddl3r`
-- **Password**: `letsmakeatrade`
+- **Username**: `REDACTED_ADMIN_USER`
+- **Password**: `REDACTED_ADMIN_PASS`
 
 ### **Session Management**
 - **24-hour persistent sessions** - No constant re-authentication required
@@ -435,7 +435,7 @@ npm run preview:env-fix
 1. **Verify WebSocket Server Health**
 ```bash
 # Test admin endpoint directly
-curl -u "th3p3ddl3r:letsmakeatrade" \
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" \
   https://peddlenet-websocket-server-staging-*.web.app/admin/analytics
 ```
 
@@ -492,7 +492,7 @@ curl https://peddlenet-websocket-server-staging-*.web.app/health
 **Diagnosis**: Check if WebSocket server has data
 ```bash
 # Check raw analytics data
-curl -u "th3p3ddl3r:letsmakeatrade" \
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" \
   https://peddlenet-websocket-server-staging-*.web.app/admin/analytics
 ```
 
@@ -516,7 +516,7 @@ curl -u "th3p3ddl3r:letsmakeatrade" \
 1. **Use Direct Server Access**
 ```bash
 # Access server directly for emergency admin
-curl -u "th3p3ddl3r:letsmakeatrade" -X POST \
+curl -u "REDACTED_ADMIN_USER:REDACTED_ADMIN_PASS" -X POST \
   https://peddlenet-websocket-server-staging-*.web.app/admin/broadcast \
   -H "Content-Type: application/json" \
   -d '{"message":"Emergency announcement"}'
