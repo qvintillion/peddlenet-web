@@ -6,14 +6,19 @@ interface AdminControlsProps {
   onClearRoom: (roomCode: string) => Promise<void>;
   onWipeDatabase: () => Promise<void>;
   adminLevel: 'basic'; // 🔧 SIMPLIFIED: Single admin level
+  // Session password from the admin login — the destructive-op confirmation gates
+  // compare against it. Never hardcode a password here (the old literal was
+  // published in the public repo). Null until logged in → gates fail closed.
+  adminPassword: string | null;
 }
 
-export function AdminControls({ 
-  onBroadcast, 
-  onRoomBroadcast, 
-  onClearRoom, 
-  onWipeDatabase, 
-  adminLevel 
+export function AdminControls({
+  onBroadcast,
+  onRoomBroadcast,
+  onClearRoom,
+  onWipeDatabase,
+  adminLevel,
+  adminPassword
 }: AdminControlsProps) {
   const [broadcastMessage, setBroadcastMessage] = useState('');
   const [roomCodeToClear, setRoomCodeToClear] = useState('');
@@ -75,8 +80,8 @@ export function AdminControls({
   const handleClearRoom = async () => {
     if (!roomCodeToClear.trim()) return;
     
-    // 🔧 FIXED: Check password requirement
-    if (clearRoomPassword !== 'letsmakeatrade') {
+    // Confirmation gate: re-type the session admin password (fail closed when absent)
+    if (!adminPassword || clearRoomPassword !== adminPassword) {
       alert('❌ Incorrect password for clearing room messages');
       return;
     }
@@ -96,8 +101,8 @@ export function AdminControls({
   };
 
   const handleWipeDatabase = async () => {
-    // 🔧 FIXED: Check password requirement
-    if (wipeDbPassword !== 'letsmakeatrade') {
+    // Confirmation gate: re-type the session admin password (fail closed when absent)
+    if (!adminPassword || wipeDbPassword !== adminPassword) {
       alert('❌ Incorrect password for database wipe');
       return;
     }

@@ -26,9 +26,12 @@ interface MeshMetrics {
 
 interface MeshNetworkStatusProps {
   isLoading?: boolean;
+  // Session credentials from the admin login — never hardcode credentials here
+  // (the old literals were published in the public repo). Null until logged in.
+  credentials: { username: string; password: string } | null;
 }
 
-export function MeshNetworkStatus({ isLoading = false }: MeshNetworkStatusProps) {
+export function MeshNetworkStatus({ isLoading = false, credentials }: MeshNetworkStatusProps) {
   const [meshData, setMeshData] = useState<{
     metrics: MeshMetrics;
     connections: MeshConnection[];
@@ -59,7 +62,10 @@ export function MeshNetworkStatus({ isLoading = false }: MeshNetworkStatusProps)
     const fetchMeshData = async () => {
       try {
         setError(null);
-        
+
+        // No session credentials yet (not logged in) — nothing to fetch with.
+        if (!credentials) return;
+
         const apiUrl = getApiUrl();
         console.log('🌐 [MeshStatus] Fetching from:', apiUrl);
         console.log('🌐 [MeshStatus] Current hostname:', window.location.hostname);
@@ -73,7 +79,7 @@ export function MeshNetworkStatus({ isLoading = false }: MeshNetworkStatusProps)
         
         const response = await fetch(apiUrl, {
           headers: {
-            'Authorization': `Basic ${btoa('th3p3ddl3r:letsmakeatrade')}`,
+            'Authorization': `Basic ${btoa(`${credentials.username}:${credentials.password}`)}`,
             'Content-Type': 'application/json'
           }
         });
@@ -139,7 +145,7 @@ export function MeshNetworkStatus({ isLoading = false }: MeshNetworkStatusProps)
     const interval = setInterval(fetchMeshData, 5000);
 
     return () => clearInterval(interval);
-  }, [isClient]);
+  }, [isClient, credentials]);
 
   // Loading state
   if (isLoading || !isClient) {

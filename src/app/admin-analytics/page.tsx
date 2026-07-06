@@ -404,9 +404,6 @@ function LoginForm({ onLogin, error, isLoading }: {
           <div className="mt-6 text-center text-sm text-gray-400">
             <div className="bg-gray-900/50 p-3 rounded border">
               <p className="font-medium text-gray-300 mb-2">Admin Access:</p>
-              <div className="space-y-1">
-                <p><strong>Admin:</strong> th3p3ddl3r / letsmakeatrade</p>
-              </div>
               <p className="text-xs text-gray-500 mt-2">
                 Full admin access with all features
               </p>
@@ -1251,7 +1248,7 @@ export default function AdminAnalyticsPage() {
         )}
 
         {/* 🌐 MESH NETWORK STATUS - Prominent placement above main metrics */}
-        <MeshNetworkStatus isLoading={isLoading} />
+        <MeshNetworkStatus isLoading={isLoading} credentials={credentials} />
 
         {/* 🔧 ENHANCED: Interactive Metrics Grid - Beautiful pills for active/total */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -1300,6 +1297,7 @@ export default function AdminAnalyticsPage() {
               onClearRoom={handleClearRoom}
               onWipeDatabase={handleWipeDatabase}
               adminLevel={dashboardData.admin?.adminLevel || 'basic'}
+              adminPassword={credentials?.password ?? null}
             />
           </div>
         </div>

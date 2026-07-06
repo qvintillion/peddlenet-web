@@ -43,11 +43,20 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const buildTarget = process.env.BUILD_TARGET || 'unknown';
 const platform = process.env.PLATFORM || 'local';
 
-// 🔐 SIMPLIFIED: Single admin level
+// 🔐 SIMPLIFIED: Single admin level.
+// Credentials come from the environment ONLY (Cloud Run env vars). The old hardcoded
+// defaults were published in the public repo (and live in its git history) — never
+// reintroduce a fallback here. With the env vars unset, requireAdminAuth rejects
+// everything (fail closed).
 const ADMIN_CREDENTIALS = {
-  // Admin access (full features)
-  admin: { username: 'th3p3ddl3r', password: 'letsmakeatrade' }
+  admin: {
+    username: process.env.ADMIN_USERNAME || null,
+    password: process.env.ADMIN_PASSWORD || null
+  }
 };
+if (!ADMIN_CREDENTIALS.admin.username || !ADMIN_CREDENTIALS.admin.password) {
+  console.warn('⚠️ ADMIN_USERNAME / ADMIN_PASSWORD not set — admin endpoints are disabled (fail closed)');
+}
 
 // Enhanced environment detection using BUILD_TARGET
 function getEnvironment() {
