@@ -2186,6 +2186,50 @@ io.on('connection', (socket) => {
   // - request-mesh-stats
   // ===== END PHASE 2 =====
 
+  // Explicit participant leave WITHOUT a socket disconnect. Web clients "leave" by
+  // disconnecting (page navigation), so room cleanup only lived in the disconnect
+  // handler — but an Android RELAY that exits the room UI must keep its socket alive
+  // to continue bridging (silent-relay). Without this event the relay's participant
+  // registration lingered in activeUsers/rooms forever, so peers kept counting it as
+  // an active room member ("2 active" incl. a swiped-away relay). Mirrors the user
+  // portion of the disconnect cleanup; deliberately does NOT touch relay-presence
+  // entries, socket.data.isRelay, or a relay's room-channel subscription (the relay
+  // still needs the fan-out for bridging).
+  socket.on('leave-room', () => {
+    try {
+      const user = findUserBySocketId(socket.id);
+      if (!user) return;
+      const { userKey, userData } = user;
+      const roomId = userData.currentRoom;
+      if (!roomId) return;
+
+      removeUserFromRoom(userKey);
+
+      const userCount = getRoomUserCount(roomId);
+      socket.to(roomId).emit('user-left', {
+        peerId: userData.displayName,
+        displayName: userData.displayName,
+        userCount
+      });
+      socket.to(roomId).emit('peer-left', {
+        peerId: userData.displayName,
+        displayName: userData.displayName,
+        roomId
+      });
+      addActivityLog('user-left', {
+        displayName: userData.displayName,
+        roomId,
+        userCount
+      }, '👋');
+      // Only non-relay sockets drop the room channel; a relay keeps receiving the
+      // room's fan-out to bridge it onward.
+      if (!socket.data.isRelay) socket.leave(roomId);
+      console.log(`👋 User ${userData.displayName} left room ${roomId} (explicit leave-room, socket stays). Room now has ${userCount} users`);
+    } catch (error) {
+      console.error('❌ Error in leave-room:', error);
+    }
+  });
+
   socket.on('disconnect', () => {
     try {
       const connectionDuration = Date.now() - connectionHealth.connectedAt;
