@@ -1,6 +1,6 @@
-# 🎪 Festival Chat - PeddleNet
+# 🎪 PeddleNet Web
 
-**Version:** 4.3.5+relay (July 2026) — web app + the WebSocket backbone for the native PeddleNet mesh apps
+**Version:** 4.3.5+relay (July 2026) — web app + the WebSocket backbone for the native PeddleNet mesh apps. *(Repo renamed from `festival-chat` / `peddlenet` to `peddlenet-web`, July 2026.)*
 
 A real-time chat application for festivals and events (Next.js on Vercel → [peddlenet.app](https://peddlenet.app), Socket.IO server on Google Cloud Run), with instant QR code connections, mobile-first design, and an admin dashboard.
 
