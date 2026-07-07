@@ -17,8 +17,11 @@ function isAuthenticated(request: NextRequest): boolean {
   const [username, password] = credentials.split(':');
   
   // Check credentials (allow environment override)
-  const validUsername = process.env.ADMIN_USERNAME || 'th3p3ddl3r';
-  const validPassword = process.env.ADMIN_PASSWORD || 'letsmakeatrade';
+  // Env-only credentials — the old hardcoded fallbacks were published in the
+  // public repo (and remain in its git history). Fail closed when unset.
+  const validUsername = process.env.ADMIN_USERNAME;
+  const validPassword = process.env.ADMIN_PASSWORD;
+  if (!validUsername || !validPassword) return false;
   
   return username === validUsername && password === validPassword;
 }

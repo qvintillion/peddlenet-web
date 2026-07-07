@@ -84,10 +84,23 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# CRITICAL: Set environment variables after deployment
+# CRITICAL: Set environment variables after deployment.
+# Admin credentials come from a git-ignored local env file (.env.deploy.local) —
+# NEVER inline them here; this script is public. --set-env-vars REPLACES the whole
+# env set, so the credentials must ride every deploy or they'd be wiped.
+if [ -f .env.deploy.local ]; then
+    # shellcheck disable=SC1091
+    source .env.deploy.local
+fi
+ENV_VARS="NODE_ENV=production,BUILD_TARGET=production,PLATFORM=cloudrun"
+if [ -n "$ADMIN_USERNAME" ] && [ -n "$ADMIN_PASSWORD" ]; then
+    ENV_VARS="$ENV_VARS,ADMIN_USERNAME=$ADMIN_USERNAME,ADMIN_PASSWORD=$ADMIN_PASSWORD"
+else
+    echo "⚠️ ADMIN_USERNAME/ADMIN_PASSWORD not set (.env.deploy.local missing?) — admin endpoints will be DISABLED (fail closed)"
+fi
 echo "🔧 Setting production environment variables..."
 gcloud run services update $SERVICE_NAME \
-  --set-env-vars="NODE_ENV=production,BUILD_TARGET=production,PLATFORM=cloudrun" \
+  --set-env-vars="$ENV_VARS" \
   --region=$REGION \
   --project=$PROJECT_ID
 
