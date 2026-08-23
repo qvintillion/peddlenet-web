@@ -199,11 +199,39 @@ live path at the moment it is emitted has nothing to ride later.
 | Peddler hold | `BluetoothMeshManager.kt:~4001` | `if (peddlerMode && !anchorMode && message.type == "chat" && …)` |
 | Rejoin replay / link replay | `scheduleRejoinReplay`, `scheduleLinkReplay` → `offerMissedChats` | chats only, by name and construction |
 
-**Open question — resolve this first.** The courier hold at `BluetoothMeshManager.kt:~5290`
-(`peddlerMode && !anchorMode && !authoredByUs`) is **not** type-gated; its comment says a courier
-"picks up whatever it hears, anywhere". Confirm whether room-join frames actually reach and survive
-that lane *and its replay*. If they do, the problem is narrower than the table suggests and is
-about **ordering**, not **carriage** — which decides which fix below applies.
+**~~Open question — resolve this first.~~ ANSWERED 2026-08-23 (field, nord + a5 ring logs).** The
+courier hold at `BluetoothMeshManager.kt:~5290` (`peddlerMode && !anchorMode && !authoredByUs`) is
+not type-gated, but **room-join frames never reach it in practice**. Measured over a ~4 h window
+across both Android nodes:
+
+| frames | rode `via:"outpost"` / `via:"peddler"` |
+|---|---|
+| `type:"chat"` | **2 323** (1 301 outpost + 1 022 peddler) |
+| `type:"room-join"` | **0** |
+
+Two independent corroborations, so this is not an empty-grep artifact:
+
+- **Schema.** A room-join frame carries no `via` key at all — its fields are `type, msg, from, room,
+  timestamp, lat, lon, acc, rx2, mtu, df, relay, rk, rup, rmp, nf2, ms2, aat, pk, sig, mrec`. The
+  courier lane stamps `via` on what it carries; membership frames are never stamped.
+- **Hop ceiling.** Room-joins stop dead at hop 1 (358 × hop-0, 104 × hop-1, nothing beyond) while
+  chats in the same capture reach hop 6 (106/240/164/107/336/254/7 across hops 0-6).
+
+⇒ **The problem is CARRIAGE, not ordering.** The table above is complete; fix directions 2 and 3
+below are the applicable ones, and direction 1 (instrument the courier lane) is now redundant.
+
+⭐ Note for direction 2: the room-join schema **already carries `mrec`** — the author's signed
+member record. Piggybacking it onto chat frames therefore reuses a field that is already on the
+wire and already self-verifying, rather than adding one.
+
+**Field specimen (2026-08-23).** A user invited `Valentina` to `opal-phoenix-3717` by share link;
+she joined out of nord's direct range and spoke. nord received **7 of her chats** for that room, all
+at `hopCount` 1-2 via `outpost`/`peddler` — and **zero room-joins for it at any hop**. Every room
+nord *did* get a hop-0 join from is a room she holds a signed record for; `opal-phoenix-3717` is
+absent from that list entirely. This is the repro sketch below, observed unplanned in the field.
+⚠️ Her participant-list row for that room is **correct** (the user confirmed) — presence was learned
+from the relayed chats. The defect is the missing *arrival notice* and the missing signed record,
+not the roster row.
 
 **The other propagation route is anti-entropy, and it's strictly reactive.**
 `AntiEntropyScope.kt`: *"a peer's own hop-0 `room-join` names the room, and we answer only for THAT
@@ -235,8 +263,9 @@ stayed silent:
 
 **Direction:**
 
-1. **Answer the carriage question first** (instrument whether `type == "room-join"` frames are held
-   and replayed by the courier lane at `:~5290`, or only by the live forward path).
+1. ~~**Answer the carriage question first**~~ — **DONE 2026-08-23** (field-measured above:
+   2 323 chats rode a courier lane, 0 room-joins; room-joins have no `via` key and stop at hop 1).
+   The answer is CARRIAGE, so start at step 2.
 2. **Give membership a carriage lane.** Either let the drop-box/outbox hold membership frames as
    first-class cargo, or piggyback the author's signed `MemberRecord` on chat frames — a chat
    already carries `pk`/`sig`, and a signed record is self-verifying (`MembershipLedger` rules 2-4:
