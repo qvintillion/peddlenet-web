@@ -22,6 +22,7 @@ import { useRoomUnreadTracker } from '@/hooks/use-unread-messages';
 // import { QRPeerUtils } from '@/utils/qr-peer-utils';
 import { RoomCodeDiagnosticPanel } from '@/components/RoomCodeDiagnostics';
 import { MeshNetworkDebug } from '@/components/MeshNetworkDebug';
+import { OpenInAppBanner } from '@/components/OpenInAppBanner';
 import { prettifyRoomCode, getRoomDisplayName } from '@/utils/generate-room-code';
 import { RoomCodeManager } from '@/utils/room-codes';
 
@@ -681,6 +682,11 @@ export default function ChatRoomPage() {
 
       {/* Enhanced Messages */}
       <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
+        {/* 🟥 08-23: the escape hatch into the native app. Mounted ABOVE the messages and inside
+            the scroll region so it is the first thing an arriving invitee sees, and scrolls away
+            once they start reading rather than permanently taxing the viewport. Renders nothing
+            on desktop. See OpenInAppBanner for why a button rather than a redirect. */}
+        <OpenInAppBanner roomId={roomId} roomName={roomDisplayName} />
         {messages.length === 0 && (
           <div className="text-center text-gray-300 mt-8">
             {status.connectedPeers === 0 ? (
