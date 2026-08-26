@@ -22,9 +22,6 @@ export default function LandingPage() {
     <main className="min-h-screen bg-[#0B0B0F] text-[#F4F1EA]">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
-        <p className="mb-4 text-sm font-medium tracking-widest text-[#4FE0C0] uppercase">
-          Off-grid mesh messaging
-        </p>
         <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl">
           Your crew stays reachable
           <br />
@@ -32,49 +29,34 @@ export default function LandingPage() {
             when the network doesn&apos;t.
           </span>
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#B9B4AC]">
-          At a festival the signal dies exactly when you need it. PeddleNet passes
-          messages <strong className="text-[#F4F1EA]">phone to phone over Bluetooth</strong> —
-          so a message finds your friend even when nothing else can.
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#B9B4AC]">
+          No towers. No wifi. No accounts.
+          <br />
+          Just the phones already around you.
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-4">
-          <Link
-            href="/app"
-            className="rounded-full bg-[#4FE0C0] px-7 py-3 font-semibold text-[#0B0B0F] transition hover:opacity-90"
-          >
-            Open PeddleNet
-          </Link>
-          <a
-            href="#how"
-            className="rounded-full border border-[#2A2A33] px-7 py-3 font-semibold text-[#F4F1EA] transition hover:border-[#4FE0C0]"
-          >
-            How it works
-          </a>
-        </div>
-
-        <p className="mt-6 text-sm text-[#7C7770]">
-          No account. No phone number. Nothing to sign up for.
+        <p className="mt-8 text-sm text-[#7C7770]">
+          Bluetooth mesh. Nothing to sign up for.
         </p>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────── */}
-      <section id="how" className="border-t border-[#1C1C22] bg-[#0E0E13]">
+      <section id="how" className="border-t border-[#1C1C22]">
         <div className="mx-auto max-w-5xl px-6 py-16">
-          <h2 className="text-2xl font-bold sm:text-3xl">How it works</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">How it works</h2>
           <div className="mt-10 grid gap-8 sm:grid-cols-3">
             {[
               {
-                t: 'Phones relay for each other',
-                d: 'Every phone running PeddleNet passes messages along. Your friend does not need to be in range of you — only of someone between you.',
+                t: 'Everyone is the network',
+                d: 'Each phone hands the message to the next. You are never talking to a tower — you are talking through the crowd.',
               },
               {
-                t: 'Messages wait to be carried',
-                d: 'Out of range? A message is held and handed over the moment a path appears. Walking past someone is enough.',
+                t: 'A message can wait',
+                d: 'Nobody in range? It sits in someone\u2019s pocket until a path opens. Sometimes that path is a stranger walking the long way round.',
               },
               {
-                t: 'A compass, not a map',
-                d: 'See roughly how far away your crew is and which way to walk — with the uncertainty shown honestly, never a confident wrong arrow.',
+                t: 'A pull, not a pin',
+                d: 'The compass points at your crew and admits when it is guessing. A wide arc is the truth; a confident arrow would be a lie.',
               },
             ].map((c) => (
               <div key={c.t}>
@@ -91,16 +73,16 @@ export default function LandingPage() {
         <h2 className="text-2xl font-bold sm:text-3xl">Built to know as little as possible</h2>
         <ul className="mt-8 space-y-4 text-[#B9B4AC]">
           <li>
-            <strong className="text-[#F4F1EA]">No accounts.</strong> You pick a display name on
-            your own device. There is nothing to register and nothing to log in to.
+            <strong className="text-[#F4F1EA]">You are a name you chose.</strong> Nothing to
+            register, nothing to log into, nothing that follows you home.
           </li>
           <li>
-            <strong className="text-[#F4F1EA]">Messages travel between phones.</strong> Over
-            Bluetooth they do not pass through our servers, because on the mesh there are none.
+            <strong className="text-[#F4F1EA]">There is no server to read it.</strong> On the mesh
+            a message goes phone to phone. It never passes through us.
           </li>
           <li>
-            <strong className="text-[#F4F1EA]">Location stays on your phone.</strong> The compass
-            works out distances locally. Your position is shared only with the crew you joined.
+            <strong className="text-[#F4F1EA]">Your location stays where you are.</strong> The
+            distance is worked out on your own phone, and only your crew ever sees it.
           </li>
         </ul>
         <p className="mt-8 text-sm text-[#7C7770]">
