@@ -8,4 +8,13 @@
       "7A:75:C0:73:3B:5E:85:4B:69:F3:37:9C:D7:B5:A7:E6:40:EA:F6:7F:AF:8F:D5:2B:09:CD:45:BA:E4:F5:09:D0"
     ]
   }
+},{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.peddlenet.festivalchat.alpha",
+    "sha256_cert_fingerprints": [
+      "7A:75:C0:73:3B:5E:85:4B:69:F3:37:9C:D7:B5:A7:E6:40:EA:F6:7F:AF:8F:D5:2B:09:CD:45:BA:E4:F5:09:D0"
+    ]
+  }
 }]
