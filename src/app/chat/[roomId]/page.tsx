@@ -81,7 +81,7 @@ export default function ChatRoomPage() {
           <h2 className="text-xl font-semibold mb-2">Invalid Room</h2>
           <p className="text-gray-400 mb-4">Room ID not found or invalid.</p>
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/app')}
             className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
           >
             Go Home
@@ -506,7 +506,7 @@ export default function ChatRoomPage() {
         
         <div className="flex items-center justify-between mb-2">
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/app')}
             className="p-2 rounded-lg hover:bg-gray-800/50 transition min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Go to homepage"
           >

@@ -208,7 +208,7 @@ export default function P2PDiagnosticPage() {
       <div className="mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">P2P Connection Diagnostic</h1>
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/app')}
           className="text-blue-600 hover:text-blue-700"
         >
           ← Back

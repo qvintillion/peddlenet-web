@@ -229,7 +229,7 @@ export default function NetworkComparisonPage() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">🔬 Network Environment Analysis</h1>
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/app')}
             className="text-purple-400 hover:text-purple-300"
           >
             ← Back to Home

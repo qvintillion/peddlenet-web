@@ -86,7 +86,7 @@ export function NotificationSettings({ roomId, className = '' }: NotificationSet
         {permission === 'default' && (
           <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
             <p className="text-sm text-yellow-800 mb-2">
-              ⚠️ Notifications not enabled. <Link href="/" className="underline font-medium">Enable on homepage</Link> to get notified for this room.
+              ⚠️ Notifications not enabled. <Link href="/app" className="underline font-medium">Enable on homepage</Link> to get notified for this room.
             </p>
           </div>
         )}

@@ -73,7 +73,7 @@ export function ChatRoomSettings({ roomId, className = '', onClose }: ChatRoomSe
     }
     
     // Navigate back to homepage
-    router.push('/');
+    router.push('/app');
     
     // Close settings if callback provided
     if (onClose) {
@@ -163,7 +163,7 @@ export function ChatRoomSettings({ roomId, className = '', onClose }: ChatRoomSe
           {permission === 'default' && (
             <div className="p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
               <p className="text-sm text-yellow-200 mb-2">
-                ⚠️ Notifications not enabled. <Link href="/" className="underline font-medium">Enable on homepage</Link> first.
+                ⚠️ Notifications not enabled. <Link href="/app" className="underline font-medium">Enable on homepage</Link> first.
               </p>
             </div>
           )}

@@ -14,7 +14,7 @@ export default function DiagnosticsPage() {
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-white">🔧 Connection Diagnostics</h1>
             <Link 
-              href="/"
+              href="/app"
               className="text-purple-400 hover:text-purple-300 transition"
             >
               ← Home
