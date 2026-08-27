@@ -1,7 +1,7 @@
 [
   "PRIVACY NOTICE",
   "PeddleNet — community test (Tier C)",
-  "This notice explains what personal data PeddleNet processes in the beta and your rights. Controller: Bill Costello / [PeddleNet entity] · Contact: th3p3ddl3r@gmail.com.",
+  "This notice explains what personal data PeddleNet processes in the beta and your rights. Controller: Bill Costello / Qvintessential Design · Contact: th3p3ddl3r@gmail.com.",
   "1. Our privacy principle",
   "PeddleNet is designed to be anonymous by default. You are shown to others only by a display name you choose (which can be a pseudonym); we do not require your real name, phone number, or email to use the beta.",
   "2. What we process",
@@ -20,7 +20,7 @@
   "6. Security — and an important limit",
   "Messages are cryptographically signed so recipients can verify who sent them. However, message contents are NOT end-to-end encrypted in the beta, and \"private\" rooms are code-gated access, not encryption. Please do not send confidential or sensitive information through the Service.",
   "7. Your rights",
-  "Depending on where you live (e.g., EU/UK under GDPR, California under CCPA), you may have rights to access, correct, delete, or port your data, to withdraw consent, to object to or restrict processing, and to opt out of any \"sale\" or \"sharing\" (we do neither). To exercise them, email [th3p3ddl3r@gmail.com]. You may also complain to your local data-protection authority.",
+  "Depending on where you live (e.g., EU/UK under GDPR, California under CCPA), you may have rights to access, correct, delete, or port your data, to withdraw consent, to object to or restrict processing, and to opt out of any \"sale\" or \"sharing\" (we do neither). To exercise them, email th3p3ddl3r@gmail.com. You may also complain to your local data-protection authority.",
   "8. Children",
   "The beta is for users 18 and older; we do not knowingly process data from children.",
   "9. Changes to this notice",
