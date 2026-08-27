@@ -133,9 +133,9 @@ export default function LandingPage() {
             <div>
               <h3 className="m-0 mb-1.5 text-[17px] font-bold">Relay for others</h3>
               <p className="m-0 max-w-[58ch] text-[#a7a29b]">
-                Too far to reach directly? The devices between you pass it along. Every one of them
-                is a <span className="text-[#ff5db1]">relay</span>, so a message hops the crowd to
-                reach the room — and more people means more paths.
+                Too far to reach directly? With{' '}
+                <span className="text-[#ff5db1]">relays</span>, messages hop devices to reach your
+                crew — more relays mean more paths.
               </p>
             </div>
           </div>
