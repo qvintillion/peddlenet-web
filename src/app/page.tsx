@@ -21,9 +21,12 @@ export const metadata = {
  * signal. No screenshots, no fake testimonials, no download buttons for stores it is not on yet.
  *
  * ⭐ 08-27: ported from the approved mockup — the network mark, the animated iris, the CTA to the
- * field-test form, and the five-role pathway. The "Built to know as little as possible" section
- * predates that mockup and is KEPT deliberately: it is the only place the privacy promises are
- * spelled out in plain language, and the mockup simply never had one.
+ * field-test form, and the five-role pathway.
+ *
+ * ⚠️ NO PRIVACY SECTION, AND NO "Open the app" IN THE FOOTER (user, 08-27). An earlier revision
+ * carried a "Built to know as little as possible" list here; it was cut deliberately, not lost in
+ * a re-sync. The privacy promises live in the Notice, which the hero footnote and the footer both
+ * link to. Do not restore either as a "fix".
  *
  * ⚠️ THE MARK'S ASPECT IS 1.24 — width hits the box edge first, so it is sized on WIDTH
  * (`w-[30px] h-auto`) and the height follows. Sizing on height renders it letterboxed.
@@ -158,48 +161,10 @@ export default function LandingPage() {
           <MessagePathway />
         </section>
 
-        {/* ── Privacy ──────────────────────────────────────────────────────────
-            ⚠️ KEPT from the pre-mockup page. The mockup had no privacy section, and this is the
-            only place the promises are spelled out in plain language rather than buried in the
-            Notice. Do not drop it when re-syncing against a mockup. */}
-        <section className="border-t border-[#1e1e28] py-[60px]">
-          <h2 className="m-0 mb-2 text-[clamp(22px,3.4vw,32px)] font-bold tracking-[-.01em]">
-            Built to know as little as possible
-          </h2>
-          <ul className="mt-8 space-y-4 text-[#a7a29b]">
-            <li>
-              <strong className="text-[#f4f1ea]">You are a name you chose.</strong> Nothing to
-              register, nothing to log into, nothing that follows you home.
-            </li>
-            <li>
-              <strong className="text-[#f4f1ea]">There is no server to read it.</strong> On the mesh
-              a message goes phone to phone. It never passes through us.
-            </li>
-            <li>
-              <strong className="text-[#f4f1ea]">Your location stays where you are.</strong> The
-              distance is worked out on your own phone, and only your crew ever sees it.
-            </li>
-          </ul>
-          <p className="mt-8 text-sm text-[#6e6a64]">
-            The full detail is in the{' '}
-            <Link href="/privacy" className="text-[#4fe0c0] underline underline-offset-4">
-              Privacy Notice
-            </Link>{' '}
-            and the{' '}
-            <Link href="/terms" className="text-[#4fe0c0] underline underline-offset-4">
-              Beta Terms of Service
-            </Link>
-            . PeddleNet is currently a community beta, and it is 18+.
-          </p>
-        </section>
-
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <footer className="border-t border-[#1e1e28] pb-[60px] pt-[34px] text-[13px] text-[#6e6a64]">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <span className="font-semibold text-[#f4f1ea]">PeddleNet</span>
-            <Link href="/app" className="no-underline hover:text-[#4fe0c0]">
-              Open the app
-            </Link>
             <Link href="/terms" className="no-underline hover:text-[#4fe0c0]">
               Beta Terms of Service
             </Link>
