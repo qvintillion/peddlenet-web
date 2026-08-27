@@ -11,6 +11,18 @@ import { useState } from 'react';
  *
  * ⚠️ The caption has a MIN-HEIGHT floor: it swaps text on every selection, and without one the
  * whole page jogs as a two-line description replaces a one-line one.
+ *
+ * ⭐ ORDER IS THE ROUTE, and it is deliberate (user, 08-27):
+ *     You → Relay → Outpost → Peddler → Crew
+ * The two store-and-forward roles sit in the MIDDLE, between the live hops that start the
+ * journey and the crew that ends it — the message only falls back to an outpost or a peddler
+ * when no live path exists, then resumes. Crew is LAST because it is the destination.
+ * ⚠️ The gradient track's colour stops are hand-ordered to match this sequence — reorder the
+ * roles and the track's `linear-gradient` must be reordered with them, or the line will run
+ * through colours that no longer sit above it.
+ *
+ * ⚠️ THE OUTPOST IS A DIAMOND, not a dot — it is this app's outpost mark everywhere an outpost
+ * is named small (a rotated square with a softened corner radius).
  */
 const ROLES = [
   {
@@ -28,11 +40,11 @@ const ROLES = [
       'Too far to reach directly? The devices in between pass the message along without ever reading it. Every one of them is a relay, so more people means more paths.',
   },
   {
-    id: 'crew',
-    label: 'Crew',
-    color: '#6aa8ff',
+    id: 'outpost',
+    label: 'Outpost',
+    color: '#f5b642',
     caption:
-      'Your crew — a room and the people in it, private with a code or open to anyone at the event. The message arrives having hopped the crowd.',
+      'Pinned to one spot as a landmark and a mail drop. An outpost holds messages for a crew and hands them over when someone walks past.',
   },
   {
     id: 'peddler',
@@ -42,11 +54,11 @@ const ROLES = [
       'When no live path exists, a peddler opts in to carry the message on foot, holding it until the paths finally cross.',
   },
   {
-    id: 'outpost',
-    label: 'Outpost',
-    color: '#f5b642',
+    id: 'crew',
+    label: 'Crew',
+    color: '#6aa8ff',
     caption:
-      'Pinned to one spot as a landmark and a mail drop. An outpost holds messages for a crew and hands them over when someone walks past.',
+      'Your crew — a room and the people in it, private with a code or open to anyone at the event. The message arrives having hopped the crowd.',
   },
 ] as const;
 
@@ -75,7 +87,7 @@ export function MessagePathway() {
           className="pointer-events-none absolute left-[8%] right-[8%] top-[30px] h-0.5 opacity-35 sm:top-9"
           style={{
             background:
-              'linear-gradient(90deg,#4fe0c0,#ff5db1,#6aa8ff,#8b5cff,#f5b642)',
+              'linear-gradient(90deg,#4fe0c0,#ff5db1,#f5b642,#8b5cff,#6aa8ff)',
           }}
         />
         {ROLES.map((role, i) => {
@@ -96,7 +108,10 @@ export function MessagePathway() {
               <span
                 className={[
                   'h-[15px] w-[15px] transition-all duration-200 sm:h-5 sm:w-5',
-                  isOutpost ? 'rotate-45 rounded-[3px]' : 'rounded-full',
+                  // ⚠️ Rotation is set in the INLINE transform below, not here: it has to
+                  // compose with the selected-state scale, and an inline transform overrides a
+                  // Tailwind rotate class outright. Only the corner radius is a class.
+                  isOutpost ? 'rounded-[3px]' : 'rounded-full',
                   on ? 'opacity-100' : 'opacity-55 group-hover:opacity-100',
                 ].join(' ')}
                 style={{
