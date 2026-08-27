@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { NetworkMark } from '@/components/NetworkMark';
+import { IrisRing } from '@/components/IrisRing';
+import { MessagePathway } from '@/components/MessagePathway';
 
 export const metadata = {
   title: 'PeddleNet — the festival mesh that works with no signal',
@@ -7,7 +10,7 @@ export const metadata = {
 };
 
 /**
- * The public landing page (08-26).
+ * The public landing page.
  *
  * ⚠️ THIS ROUTE USED TO BE THE WEB CHAT APP. It now lives at `/app`, moved with `git mv` so the
  * file is byte-identical. `/chat/[roomId]` is UNTOUCHED — those URLs are already live inside QR
@@ -16,97 +19,196 @@ export const metadata = {
  *
  * ⭐ Content is deliberately about the ONE thing that is true and unusual: it works with no
  * signal. No screenshots, no fake testimonials, no download buttons for stores it is not on yet.
+ *
+ * ⭐ 08-27: ported from the approved mockup — the network mark, the animated iris, the CTA to the
+ * field-test form, and the five-role pathway. The "Built to know as little as possible" section
+ * predates that mockup and is KEPT deliberately: it is the only place the privacy promises are
+ * spelled out in plain language, and the mockup simply never had one.
+ *
+ * ⚠️ THE MARK'S ASPECT IS 1.24 — width hits the box edge first, so it is sized on WIDTH
+ * (`w-[30px] h-auto`) and the height follows. Sizing on height renders it letterboxed.
  */
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0F] text-[#F4F1EA]">
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
-        <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl">
-          Your crew stays reachable
-          <br />
-          <span className="bg-gradient-to-r from-[#F45D9E] via-[#A55CFF] to-[#4FE0C0] bg-clip-text text-transparent">
-            when the network doesn&apos;t.
-          </span>
-        </h1>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#B9B4AC]">
-          No towers. No wifi. No accounts.
-          <br />
-          Just the phones already around you.
-        </p>
+    <main className="min-h-screen bg-[#08080b] font-[family-name:var(--font-jetbrains-mono)] leading-relaxed text-[#f4f1ea] antialiased">
+      <div className="border-b border-[#1e1e28] bg-[#141018] px-6 py-2.5 text-xs tracking-[.04em] text-[#f5b642]">
+        Community beta · not yet on the app stores
+      </div>
 
-        <p className="mt-8 text-sm text-[#7C7770]">
-          Bluetooth mesh. Nothing to sign up for.
-        </p>
-      </section>
+      <div className="mx-auto max-w-[960px] px-6">
+        {/* ⭐ OPTICAL, NOT BOX, ALIGNMENT. The iris ring below is drawn at r=93 in a 240 viewBox
+            with an 11-wide halo, so its leftmost ink sits ~8.96% into its box. The mark's small
+            leaf starts at x=7 of 100. Matching the BOXES would leave the two shapes ~15px apart
+            on screen; this offset lines up the INK instead.
+            ⚠️ RECOMPUTE IF THE MARK CHANGES — 14.92px assumes the leaf begins at x=7 at 30px wide. */}
+        <header className="flex justify-start pt-[26px]">
+          <Link
+            href="/"
+            aria-label="PeddleNet home"
+            className="ml-[14.92px] inline-flex items-center gap-2.5 text-[13px] font-bold tracking-[.04em] text-[#f4f1ea] no-underline opacity-90 transition-opacity hover:opacity-100 max-[640px]:ml-[calc(42vw*0.0896-2.1px)]"
+          >
+            <NetworkMark className="block h-auto w-[30px] flex-none" />
+            <span>PeddleNet</span>
+          </Link>
+        </header>
 
-      {/* ── How it works ─────────────────────────────────────────────────── */}
-      <section id="how" className="border-t border-[#1C1C22]">
-        <div className="mx-auto max-w-5xl px-6 py-16">
-          <h2 className="text-3xl font-bold sm:text-4xl">How it works</h2>
-          <div className="mt-10 grid gap-8 sm:grid-cols-3">
-            {[
-              {
-                t: 'Everyone is the network',
-                d: 'Each phone hands the message to the next. You are never talking to a tower — you are talking through the crowd.',
-              },
-              {
-                t: 'A message can wait',
-                d: 'Nobody in range? It sits in someone\u2019s pocket until a path opens. Sometimes that path is a stranger walking the long way round.',
-              },
-              {
-                t: 'A pull, not a pin',
-                d: 'The compass points at your crew and admits when it is guessing. A wide arc is the truth; a confident arrow would be a lie.',
-              },
-            ].map((c) => (
-              <div key={c.t}>
-                <h3 className="text-lg font-semibold text-[#4FE0C0]">{c.t}</h3>
-                <p className="mt-3 leading-relaxed text-[#B9B4AC]">{c.d}</p>
-              </div>
-            ))}
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <div className="pb-16 pt-[46px]">
+          <IrisRing />
+          <h1 className="m-0 text-[clamp(36px,6.6vw,66px)] font-bold leading-[1.04] tracking-[-.025em]">
+            No signal.
+            <br />
+            <span className="bg-gradient-to-r from-[#ff5db1] via-[#8b5cff] to-[#4fe0c0] bg-clip-text text-transparent">
+              Still in touch.
+            </span>
+          </h1>
+          <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">
+            An ad-hoc network for festivals and events
+          </p>
+          <p className="mt-3.5 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
+            Off-grid Bluetooth · Crowd-sourced infrastructure · iOS &amp; Android
+          </p>
+
+          {/* The form is the ONE action on this page, so it carries the only filled button.
+              "How it works" is an in-page jump, so it stays a quiet outline: a second filled
+              button would make the reader choose between two things that are not equivalent. */}
+          <div className="mt-[34px] flex flex-wrap gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdEm92Q-56f5BJUo1Vo9z5JrlnbUdOVL_A979DLOc6MXDJTsg/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] no-underline transition hover:opacity-90"
+            >
+              Join the field test
+            </a>
+            <a
+              href="#how"
+              className="rounded-full border border-[#1e1e28] px-6 py-[13px] text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0]"
+            >
+              How it works
+            </a>
           </div>
+          <p className="mt-4 text-xs text-[#6e6a64]">
+            Community beta · 18+ · by accepting the{' '}
+            <Link href="/terms" className="text-[#a7a29b] hover:text-[#4fe0c0]">
+              Beta&nbsp;Terms
+            </Link>{' '}
+            and{' '}
+            <Link href="/privacy" className="text-[#a7a29b] hover:text-[#4fe0c0]">
+              Privacy&nbsp;Notice
+            </Link>
+          </p>
         </div>
-      </section>
 
-      {/* ── Privacy ──────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <h2 className="text-2xl font-bold sm:text-3xl">Built to know as little as possible</h2>
-        <ul className="mt-8 space-y-4 text-[#B9B4AC]">
-          <li>
-            <strong className="text-[#F4F1EA]">You are a name you chose.</strong> Nothing to
-            register, nothing to log into, nothing that follows you home.
-          </li>
-          <li>
-            <strong className="text-[#F4F1EA]">There is no server to read it.</strong> On the mesh
-            a message goes phone to phone. It never passes through us.
-          </li>
-          <li>
-            <strong className="text-[#F4F1EA]">Your location stays where you are.</strong> The
-            distance is worked out on your own phone, and only your crew ever sees it.
-          </li>
-        </ul>
-        <p className="mt-8 text-sm text-[#7C7770]">
-          The full detail is in the{' '}
-          <Link href="/privacy" className="text-[#4FE0C0] underline underline-offset-4">
-            Privacy Notice
-          </Link>
-          {' '}and the{' '}
-          <Link href="/terms" className="text-[#4FE0C0] underline underline-offset-4">
-            Beta Terms of Service
-          </Link>
-          . PeddleNet is currently a community beta, and it is 18+.
-        </p>
-      </section>
+        {/* ── How it works ─────────────────────────────────────────────────── */}
+        <section id="how" className="scroll-mt-7 border-t border-[#1e1e28] py-[60px]">
+          <h2 className="m-0 mb-2 text-[clamp(22px,3.4vw,32px)] font-bold tracking-[-.01em]">
+            How it works
+          </h2>
+          <p className="mb-[38px] mt-0 max-w-[54ch] text-[#a7a29b]">
+            Three ways a message gets there when there’s no signal.
+          </p>
 
-      {/* ── Footer ───────────────────────────────────────────────────────── */}
-      <footer className="border-t border-[#1C1C22]">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-8 gap-y-3 px-6 py-10 text-sm text-[#7C7770]">
-          <span className="font-semibold text-[#F4F1EA]">PeddleNet</span>
-          <Link href="/app" className="hover:text-[#4FE0C0]">Open the app</Link>
-          <Link href="/terms" className="hover:text-[#4FE0C0]">Beta Terms of Service</Link>
-          <Link href="/privacy" className="hover:text-[#4FE0C0]">Privacy Notice</Link>
-        </div>
-      </footer>
+          <div className="grid grid-cols-[auto_1fr] gap-5 py-6 max-[640px]:grid-cols-1 max-[640px]:gap-1.5">
+            <div className="whitespace-nowrap pt-[5px] text-xs tracking-[.14em] text-[#6e6a64] max-[640px]:pt-0">
+              01
+            </div>
+            <div>
+              <h3 className="m-0 mb-1.5 text-[17px] font-bold">Mesh messaging</h3>
+              <p className="m-0 max-w-[58ch] text-[#a7a29b]">
+                Instantly connect with the people around you — chat, and find each other with the
+                compass. Every member becomes a <span className="text-[#4fe0c0]">node</span> in the
+                mesh, and every node makes it stronger.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[auto_1fr] gap-5 border-t border-[#1e1e28] py-6 max-[640px]:grid-cols-1 max-[640px]:gap-1.5">
+            <div className="whitespace-nowrap pt-[5px] text-xs tracking-[.14em] text-[#6e6a64] max-[640px]:pt-0">
+              02
+            </div>
+            <div>
+              <h3 className="m-0 mb-1.5 text-[17px] font-bold">Relay for others</h3>
+              <p className="m-0 max-w-[58ch] text-[#a7a29b]">
+                Too far to reach directly? The devices between you pass it along. Every one of them
+                is a <span className="text-[#ff5db1]">relay</span>, so a message hops the crowd to
+                reach the room — and more people means more paths.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[auto_1fr] gap-5 border-t border-[#1e1e28] py-6 max-[640px]:grid-cols-1 max-[640px]:gap-1.5">
+            <div className="whitespace-nowrap pt-[5px] text-xs tracking-[.14em] text-[#6e6a64] max-[640px]:pt-0">
+              03
+            </div>
+            <div>
+              <h3 className="m-0 mb-1.5 text-[17px] font-bold">
+                <span className="text-[#f5b642]">◆</span> Drop off at an outpost
+              </h3>
+              <p className="m-0 max-w-[58ch] text-[#a7a29b]">
+                Nobody in range at all? Leave it at an{' '}
+                <span className="text-[#f5b642]">outpost</span> — a phone pinned to one spot that
+                holds mail until its owner walks past. A{' '}
+                <span className="text-[#8b5cff]">peddler</span> does the same on foot, carrying what
+                you left in their pocket until the paths finally cross.
+              </p>
+            </div>
+          </div>
+
+          <MessagePathway />
+        </section>
+
+        {/* ── Privacy ──────────────────────────────────────────────────────────
+            ⚠️ KEPT from the pre-mockup page. The mockup had no privacy section, and this is the
+            only place the promises are spelled out in plain language rather than buried in the
+            Notice. Do not drop it when re-syncing against a mockup. */}
+        <section className="border-t border-[#1e1e28] py-[60px]">
+          <h2 className="m-0 mb-2 text-[clamp(22px,3.4vw,32px)] font-bold tracking-[-.01em]">
+            Built to know as little as possible
+          </h2>
+          <ul className="mt-8 space-y-4 text-[#a7a29b]">
+            <li>
+              <strong className="text-[#f4f1ea]">You are a name you chose.</strong> Nothing to
+              register, nothing to log into, nothing that follows you home.
+            </li>
+            <li>
+              <strong className="text-[#f4f1ea]">There is no server to read it.</strong> On the mesh
+              a message goes phone to phone. It never passes through us.
+            </li>
+            <li>
+              <strong className="text-[#f4f1ea]">Your location stays where you are.</strong> The
+              distance is worked out on your own phone, and only your crew ever sees it.
+            </li>
+          </ul>
+          <p className="mt-8 text-sm text-[#6e6a64]">
+            The full detail is in the{' '}
+            <Link href="/privacy" className="text-[#4fe0c0] underline underline-offset-4">
+              Privacy Notice
+            </Link>{' '}
+            and the{' '}
+            <Link href="/terms" className="text-[#4fe0c0] underline underline-offset-4">
+              Beta Terms of Service
+            </Link>
+            . PeddleNet is currently a community beta, and it is 18+.
+          </p>
+        </section>
+
+        {/* ── Footer ───────────────────────────────────────────────────────── */}
+        <footer className="border-t border-[#1e1e28] pb-[60px] pt-[34px] text-[13px] text-[#6e6a64]">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <span className="font-semibold text-[#f4f1ea]">PeddleNet</span>
+            <Link href="/app" className="no-underline hover:text-[#4fe0c0]">
+              Open the app
+            </Link>
+            <Link href="/terms" className="no-underline hover:text-[#4fe0c0]">
+              Beta Terms of Service
+            </Link>
+            <Link href="/privacy" className="no-underline hover:text-[#4fe0c0]">
+              Privacy Notice
+            </Link>
+          </div>
+        </footer>
+      </div>
     </main>
   );
 }

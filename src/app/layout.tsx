@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 // Disable tab visibility tracking for cross-room notifications
@@ -15,25 +15,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ⭐ THE LANDING PAGE'S FACE, and only the landing page's. It is exposed as its own variable and
+// applied via `font-[family-name:var(--font-jetbrains-mono)]` on that page rather than by
+// repointing Tailwind's `--font-mono` token — that token is Geist Mono for the whole app
+// (the chat included), and swapping it globally to restyle one marketing page would be a very
+// large blast radius for a very small gain.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://peddlenet.app'),
-  title: "PeddleNet - Instant P2P Messaging",
-  description: "Connect with people nearby without internet using instant P2P chat rooms perfect for festivals and events",
+  title: "PeddleNet — the festival mesh that works with no signal",
+  description: "PeddleNet carries messages phone-to-phone over Bluetooth. No signal, no wifi, no accounts, no servers — your crew stays reachable when the network does not.",
   icons: {
     icon: '/favicon.svg',
     apple: '/peddlenet-logo.svg',
     shortcut: '/favicon.svg',
   },
   openGraph: {
-    title: 'PeddleNet - Instant P2P Messaging',
-    description: 'Connect with people nearby without internet using instant P2P chat rooms perfect for festivals and events',
+    title: 'PeddleNet — the festival mesh that works with no signal',
+    description: 'PeddleNet carries messages phone-to-phone over Bluetooth. No signal, no wifi, no accounts, no servers — your crew stays reachable when the network does not.',
     images: ['/peddlenet-logo.svg'],
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'PeddleNet - Instant P2P Messaging',
-    description: 'Connect with people nearby without internet using instant P2P chat rooms perfect for festivals and events',
+    title: 'PeddleNet — the festival mesh that works with no signal',
+    description: 'PeddleNet carries messages phone-to-phone over Bluetooth. No signal, no wifi, no accounts, no servers — your crew stays reachable when the network does not.',
     images: ['/peddlenet-logo.svg'],
   },
 };
@@ -50,7 +61,7 @@ export default function RootLayout({
         <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         {children}

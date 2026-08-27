@@ -38,3 +38,34 @@ body {
 .dot {
   transition: transform 0.2s ease;
 }
+
+
+/* ── THE IRIS (landing page) ───────────────────────────────────────────────────────────────
+   ⭐ ONE 4s PERIOD DRIVES EVERYTHING — the ring, its halo and the core share a single clock,
+   exactly as on device. Two clocks drift and read as two separate things pulsing. The halo
+   rings differ ONLY by animation-delay, which is what makes the bloom ripple outward instead
+   of the whole disc dimming in unison. Keyframes live here because Tailwind cannot express
+   them as utilities. See src/components/IrisRing.tsx. */
+.pl-iris-ring{animation:pl-iris-ring 4s ease-in-out infinite;transform-origin:120px 120px}
+@keyframes pl-iris-ring{
+  0%,100%{stroke-width:2.2;opacity:.68;transform:scale(.995)}
+  50%    {stroke-width:4.0;opacity:1;  transform:scale(1.02)}
+}
+.pl-iris-halo{transform-origin:120px 120px;animation:pl-iris-halo 4s ease-in-out infinite}
+.pl-iris-h1{opacity:.30;animation-delay:0s}
+.pl-iris-h2{opacity:.24;animation-delay:-.28s}
+.pl-iris-h3{opacity:.18;animation-delay:-.56s}
+@keyframes pl-iris-halo{
+  0%,100%{opacity:.10;transform:scale(.99)}
+  50%    {opacity:.62;transform:scale(1.045)}
+}
+.pl-iris-node{animation:pl-iris-node 4s ease-in-out infinite;transform-origin:120px 120px}
+@keyframes pl-iris-node{
+  0%,100%{opacity:.72;transform:scale(.96)}
+  50%    {opacity:1;transform:scale(1.06)}
+}
+/* ⚠️ A ring that cannot hold still is unusable for anyone who needs motion reduced — and the
+   state is carried by COLOUR anyway. Stop it dead. */
+@media (prefers-reduced-motion:reduce){
+  .pl-iris-ring,.pl-iris-halo,.pl-iris-node{animation:none}
+}
