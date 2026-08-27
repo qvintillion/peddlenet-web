@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["L68LFRQVKM.com.peddlenet.festivalchat.ios"],
+        "components": [
+          {
+            "/": "/chat/*",
+            "comment": "Room join links — the same URL the QR codes and share sheet encode."
+          }
+        ]
+      }
+    ]
+  }
+}
