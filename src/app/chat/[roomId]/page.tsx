@@ -22,6 +22,7 @@ import { useRoomUnreadTracker } from '@/hooks/use-unread-messages';
 // import { QRPeerUtils } from '@/utils/qr-peer-utils';
 import { RoomCodeDiagnosticPanel } from '@/components/RoomCodeDiagnostics';
 import { MeshNetworkDebug } from '@/components/MeshNetworkDebug';
+import { OpenInAppBanner } from '@/components/OpenInAppBanner';
 import { prettifyRoomCode, getRoomDisplayName } from '@/utils/generate-room-code';
 import { RoomCodeManager } from '@/utils/room-codes';
 
@@ -69,6 +70,33 @@ export default function ChatRoomPage() {
   const [cachedRoomDisplayName, setCachedRoomDisplayName] = useState(() => prettifyRoomCode(roomId));
   useEffect(() => {
     if (!roomId) return;
+    // 🟥 08-23 (user: "the shared room code drops room name"). A created room's id is a random
+    // adjective-noun-NN with NO relationship to the typed name — the name only ever went to the
+    // metadata server, which is deliberately torn down. So for an invited joiner the name is not
+    // derivable from the id: it either rides the link or is lost, and without this read they land
+    // in "Cosmic Dragon 42" instead of "Sunset Crew".
+    //
+    // The app half (peddlenet-app, RoomCodeGenerator.deepLinkUrl) now puts `?roomName=` on BOTH
+    // invite paths; this is the half that reads it. Neither works alone.
+    //
+    // Cached under the same `room:<id>:name` key the rest of the app uses, so a later visit
+    // without the query string still shows it.
+    //
+    // ⚠️ Read AFTER mount, with the localStorage read — the first client render must match the
+    // server HTML or hydration fails (#418, documented above).
+    // ⚠️ UNTRUSTED display text: anyone can craft a link. Trim and length-cap before it reaches
+    // the DOM; React escapes it, so this is about a plausible-looking name, not injection.
+    const fromLink = new URLSearchParams(window.location.search).get('roomName');
+    const cleaned = fromLink?.trim().slice(0, 60);
+    if (cleaned) {
+      try {
+        localStorage.setItem(`room:${roomId}:name`, cleaned);
+      } catch {
+        // Private mode / quota — the name still renders this visit, just isn't remembered.
+      }
+      setCachedRoomDisplayName(cleaned);
+      return;
+    }
     setCachedRoomDisplayName(getRoomDisplayName(roomId));
   }, [roomId]);
   
@@ -654,6 +682,11 @@ export default function ChatRoomPage() {
 
       {/* Enhanced Messages */}
       <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
+        {/* 🟥 08-23: the escape hatch into the native app. Mounted ABOVE the messages and inside
+            the scroll region so it is the first thing an arriving invitee sees, and scrolls away
+            once they start reading rather than permanently taxing the viewport. Renders nothing
+            on desktop. See OpenInAppBanner for why a button rather than a redirect. */}
+        <OpenInAppBanner roomId={roomId} roomName={roomDisplayName} />
         {messages.length === 0 && (
           <div className="text-center text-gray-300 mt-8">
             {status.connectedPeers === 0 ? (
