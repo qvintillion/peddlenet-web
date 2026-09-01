@@ -64,8 +64,40 @@ body {
   0%,100%{opacity:.72;transform:scale(.96)}
   50%    {opacity:1;transform:scale(1.06)}
 }
+/* ── The crowd inside the iris ────────────────────────────────────────────────
+   ⭐ THE SAME 4s CLOCK as everything above, for the same reason: a second period would
+   read as an unrelated thing moving. Each node carries its own DELAY, so they shine in
+   turn rather than blinking in unison — that stagger is the whole effect. Peers come and
+   go independently; a crowd that pulses as one reads as a loading spinner. */
+/* ⚠️ `transform-box:fill-box` MUST BE ON THE ANIMATED ELEMENT ITSELF, not an ancestor <g>.
+   Inherited it is not: without it each circle scales about the SVG's 0,0 origin and the nodes
+   fly across the disc — measured at 46px of drift, which looks like they are orbiting. */
+.pl-iris-peer{animation:pl-iris-peer 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+/* Irregular offsets, not an even sweep: evenly spaced delays read as a chase sequence
+   going round the circle. These are unevenly spread across the 4s so the shining looks
+   incidental — people, not a rotating light. */
+.pl-iris-q1{animation-delay:-.22s}
+.pl-iris-q2{animation-delay:-2.35s}
+.pl-iris-q3{animation-delay:-1.05s}
+.pl-iris-q4{animation-delay:-3.10s}
+.pl-iris-q5{animation-delay:-1.62s}
+.pl-iris-q6{animation-delay:-3.55s}
+.pl-iris-q7{animation-delay:-.78s}
+/* ⭐ THE PEAK IS PER-NODE (`--pl-peak`, set inline on each circle), and the trough is a
+   FRACTION of it rather than a constant. With a fixed peak every node hit the same
+   brightness at the top of its beat, which flattened the variation the positions and
+   colours were there to create — the crowd only reads as a crowd if the nodes stay
+   unlike each other THROUGHOUT the pulse, not just between beats. */
+@keyframes pl-iris-peer{
+  0%,100%{opacity:calc(var(--pl-peak,.9) * .26);transform:scale(.82)}
+  50%    {opacity:var(--pl-peak,.9);transform:scale(1.12)}
+}
+
 /* ⚠️ A ring that cannot hold still is unusable for anyone who needs motion reduced — and the
-   state is carried by COLOUR anyway. Stop it dead. */
+   state is carried by COLOUR anyway. Stop it dead. The nodes stay LIT at a mid value rather
+   than at their trough, so the crowd is still legible when nothing is moving. */
 @media (prefers-reduced-motion:reduce){
-  .pl-iris-ring,.pl-iris-halo,.pl-iris-node{animation:none}
+  .pl-iris-ring,.pl-iris-halo,.pl-iris-node,.pl-iris-peer{animation:none}
+  /* hold each node at its OWN peak, so the varied brightness survives with motion off */
+  .pl-iris-peer{opacity:var(--pl-peak,.62)}
 }
