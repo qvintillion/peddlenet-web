@@ -60,6 +60,21 @@ export default function LandingPage() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <div className="pb-16 pt-[46px]">
           <IrisRing />
+          {/* ⭐ THE PLATFORM MARKS LEAD THE HERO. Sat at the tail of the capability line they were
+              the part that wrapped on a narrow phone; here they are a line of their own and can
+              never break. Reading them BEFORE the headline also answers "can I even run this?"
+              at the top rather than three lines down.
+              ⚠️ MARKS OF PLATFORM SUPPORT, NOT STORE BADGES — PeddleNet is not on either store
+              yet (the banner above says so), and an App Store / Google Play badge would promise a
+              download link that does not exist. */}
+          {/* One step up from the tagline grey (#6e6a64): that value is calibrated for a muted
+              line of small caps, and left the marks reading as incidental when they stand alone
+              ahead of a 66px headline. Still well below the headline's own weight. */}
+          <p className="mb-[18px] flex items-center gap-[10px] text-[#a7a29b]">
+            <AppleMark className="h-[17px] w-auto" />
+            <AndroidMark className="h-[15px] w-auto" />
+            <span className="sr-only">Available for iOS and Android</span>
+          </p>
           <h1 className="m-0 text-[clamp(36px,6.6vw,66px)] font-bold leading-[1.04] tracking-[-.025em]">
             No signal.
             <br />
@@ -76,36 +91,14 @@ export default function LandingPage() {
               the app calls these outposts and anchors, but "drop-off zones" needs no glossary,
               and card 03 still introduces "outpost" properly further down.
 
-              The glyphs replace the words "iOS & Android": they survive a narrow screen without
-              wrapping mid-phrase, and they are marks of PLATFORM SUPPORT, not store badges — the
-              app is not on either store yet. `inline-flex` keeps them on the baseline with the
-              text; the visually-hidden span is what a screen reader reads.
-
-              ⚠️ THE WHOLE LINE FITS ON ONE ROW DOWN TO 320px. Verify a longer wording by BLOCK
-              HEIGHT vs line-height — counting distinct child `top` values reports a false wrap,
-              because the glyph span sits 1px lower than the text. */}
+              ⚠️ THE LINE FITS ON ONE ROW DOWN TO 320px — keep a longer wording under that budget.
+              Verify a wrap by comparing each child's `top`, NOT by dividing block height by
+              line-height: the platform marks that used to end this line sat 1px lower than the
+              text, and that rounding reported a false wrap on a line that fit. */}
           <p className="mt-3.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
             <span>Bluetooth mesh</span>
             <span aria-hidden="true">&middot;</span>
             <span>Drop-off zones</span>
-            {/* ⚠️ THE SEPARATOR IS INSIDE THE GLYPH GROUP AND HIDDEN ON THE NARROWEST SCREENS.
-                As its own flex child it could end a line, leaving a dangling "·" with the marks
-                orphaned below — which is what 320px did. Bundling it here makes it travel with
-                the glyphs; hiding it under `xs` stops it reappearing as a LEADING orphan on the
-                wrapped line, where a separator introduces nothing. From 375px up the whole line
-                fits on one row and the dot does its job. */}
-            <span className="inline-flex items-center gap-2">
-              <span aria-hidden="true" className="hidden min-[375px]:inline">&middot;</span>
-              <span className="inline-flex items-center gap-[7px]">
-              {/* ⭐ OPTICAL, NOT BOX, SIZING — the same rule the iris ring follows above. Matching
-                  the two heights makes Apple look SMALLER: its glyph fills its box top to bottom,
-                  while the Android robot is a squat silhouette with headroom above the antennae.
-                  The apple is set a touch taller so the pair reads as one weight. */}
-              <AppleMark className="h-[14px] w-auto" />
-              <AndroidMark className="h-[12px] w-auto" />
-                <span className="sr-only">iOS and Android</span>
-              </span>
-            </span>
           </p>
 
           {/* ⭐ 09-01: the email field REPLACED a link out to a Google Form. One field beats a
