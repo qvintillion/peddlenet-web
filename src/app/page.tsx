@@ -67,10 +67,10 @@ export default function LandingPage() {
             </span>
           </h1>
           <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">
-            An ad-hoc network for festivals and events
+            Messaging and more for festivals and off-grid events
           </p>
           <p className="mt-3.5 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
-            Off-grid Bluetooth · Crowd-sourced infrastructure · iOS &amp; Android
+            Bluetooth · Ad-hoc infrastructure · iOS &amp; Android
           </p>
 
           {/* ⭐ 09-01: the email field REPLACED a link out to a Google Form. One field beats a
