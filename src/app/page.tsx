@@ -85,18 +85,26 @@ export default function LandingPage() {
               HEIGHT vs line-height — counting distinct child `top` values reports a false wrap,
               because the glyph span sits 1px lower than the text. */}
           <p className="mt-3.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
-            <span>Bluetooth</span>
+            <span>Bluetooth mesh</span>
             <span aria-hidden="true">&middot;</span>
             <span>Drop-off zones</span>
-            <span aria-hidden="true">&middot;</span>
-            <span className="inline-flex items-center gap-[7px]">
+            {/* ⚠️ THE SEPARATOR IS INSIDE THE GLYPH GROUP AND HIDDEN ON THE NARROWEST SCREENS.
+                As its own flex child it could end a line, leaving a dangling "·" with the marks
+                orphaned below — which is what 320px did. Bundling it here makes it travel with
+                the glyphs; hiding it under `xs` stops it reappearing as a LEADING orphan on the
+                wrapped line, where a separator introduces nothing. From 375px up the whole line
+                fits on one row and the dot does its job. */}
+            <span className="inline-flex items-center gap-2">
+              <span aria-hidden="true" className="hidden min-[375px]:inline">&middot;</span>
+              <span className="inline-flex items-center gap-[7px]">
               {/* ⭐ OPTICAL, NOT BOX, SIZING — the same rule the iris ring follows above. Matching
                   the two heights makes Apple look SMALLER: its glyph fills its box top to bottom,
                   while the Android robot is a squat silhouette with headroom above the antennae.
                   The apple is set a touch taller so the pair reads as one weight. */}
               <AppleMark className="h-[14px] w-auto" />
               <AndroidMark className="h-[12px] w-auto" />
-              <span className="sr-only">iOS and Android</span>
+                <span className="sr-only">iOS and Android</span>
+              </span>
             </span>
           </p>
 
