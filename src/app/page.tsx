@@ -63,7 +63,7 @@ export default function LandingPage() {
             No signal.
             <br />
             <span className="bg-gradient-to-r from-[#ff5db1] via-[#8b5cff] to-[#4fe0c0] bg-clip-text text-transparent">
-              Still in touch.
+              The crowd is the network.
             </span>
           </h1>
           <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">

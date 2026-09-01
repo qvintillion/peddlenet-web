@@ -33,7 +33,7 @@
             "value": "1759854418"
           },
           {
-            "key": "X-Deploy-ID", 
+            "key": "X-Deploy-ID",
             "value": "test-20251007-1759854418"
           },
           {
@@ -60,5 +60,12 @@
   "functions": {
     "source": "functions",
     "runtime": "nodejs18"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
