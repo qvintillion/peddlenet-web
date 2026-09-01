@@ -70,14 +70,23 @@ export default function LandingPage() {
           <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">
             Messaging and more for festivals and off-grid events
           </p>
-          {/* The glyphs replace the words "iOS & Android": they survive a narrow screen without
+          {/* ⭐ "OUTPOSTS" IS THE HOOK FOR CARD 03. The drop-off idea is what makes this more than
+              a chat app, but it was only explained far down the page; naming it here plants the
+              word before the reader meets it. "Ad-hoc" was dropped rather than "mesh" — mesh
+              already implies ad-hoc, and it is the vocabulary the rest of the page uses.
+
+              The glyphs replace the words "iOS & Android": they survive a narrow screen without
               wrapping mid-phrase, and they are marks of PLATFORM SUPPORT, not store badges — the
               app is not on either store yet. `inline-flex` keeps them on the baseline with the
-              text; the visually-hidden span is what a screen reader reads. */}
+              text; the visually-hidden span is what a screen reader reads.
+
+              ⚠️ THE WHOLE LINE FITS ON ONE ROW DOWN TO 320px. Verify a longer wording by BLOCK
+              HEIGHT vs line-height — counting distinct child `top` values reports a false wrap,
+              because the glyph span sits 1px lower than the text. */}
           <p className="mt-3.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
             <span>Bluetooth</span>
             <span aria-hidden="true">&middot;</span>
-            <span>Ad-hoc infrastructure</span>
+            <span>Mesh &amp; outposts</span>
             <span aria-hidden="true">&middot;</span>
             <span className="inline-flex items-center gap-[7px]">
               {/* ⭐ OPTICAL, NOT BOX, SIZING — the same rule the iris ring follows above. Matching
