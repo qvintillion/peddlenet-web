@@ -67,6 +67,10 @@ export function BetaSignupForm() {
 
   return (
     <div className="mt-[34px]">
+      {/* ⚠️ THE INPUT TAKES ITS OWN ROW UNTIL `sm`. As a `flex-1` item in a wrapping row it does
+          not wrap — it shrinks: at 375px it was squeezed to 105px beside the 210px button, too
+          narrow to even show the "you@example.com" placeholder. `basis-full` forces the break on
+          phones; from `sm` up it returns to one line with the buttons. */}
       <form onSubmit={submit} className="flex flex-wrap gap-3">
         <label htmlFor="beta-email" className="sr-only">
           Email address
@@ -81,18 +85,18 @@ export function BetaSignupForm() {
           autoComplete="email"
           aria-describedby="beta-email-note"
           aria-invalid={error ? true : undefined}
-          className="min-w-0 flex-1 rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0]"
+          className="min-w-0 basis-full rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0] sm:flex-1 sm:basis-auto"
         />
         <button
           type="submit"
           disabled={state === 'sending'}
-          className="rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] transition hover:opacity-90 disabled:opacity-60"
+          className="flex-1 whitespace-nowrap rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] transition hover:opacity-90 disabled:opacity-60 sm:flex-none"
         >
           {state === 'sending' ? 'Sending…' : 'Join the field test'}
         </button>
         <a
           href="#how"
-          className="rounded-full border border-[#1e1e28] px-6 py-[13px] text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0]"
+          className="whitespace-nowrap rounded-full border border-[#1e1e28] px-6 py-[13px] text-center text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0]"
         >
           How it works
         </a>
