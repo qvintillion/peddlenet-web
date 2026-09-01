@@ -83,7 +83,7 @@ export default function LandingPage() {
             </span>
           </h1>
           <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">
-            Messaging and more for festivals and off-grid events
+            Messaging, a compass to your crew, and more for festivals and off-grid events
           </p>
           {/* ⭐ THIS IS THE HOOK FOR CARD 03. The drop-off idea is what makes this more than a
               chat app, but it was only explained far down the page; naming it here plants the
@@ -124,9 +124,10 @@ export default function LandingPage() {
             <div>
               <h3 className="m-0 mb-1.5 text-[17px] font-bold">Mesh messaging</h3>
               <p className="m-0 max-w-[58ch] text-[#a7a29b]">
-                Instantly connect with the people around you — chat, and find each other with the
-                compass. Every member becomes a <span className="text-[#4fe0c0]">node</span> in the
-                mesh, and every node makes it stronger.
+                Instantly connect with the people around you. A compass points to your crew, and
+                shining a light makes you easy to find in a field of thousands. Every member
+                becomes a <span className="text-[#4fe0c0]">node</span> in the mesh, and every node
+                makes it stronger.
               </p>
             </div>
           </div>
