@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { NetworkMark } from '@/components/NetworkMark';
 import { IrisRing } from '@/components/IrisRing';
+import { BetaSignupForm } from '@/components/BetaSignupForm';
 import { MessagePathway } from '@/components/MessagePathway';
 
 export const metadata = {
@@ -72,35 +73,11 @@ export default function LandingPage() {
             Off-grid Bluetooth · Crowd-sourced infrastructure · iOS &amp; Android
           </p>
 
-          {/* The form is the ONE action on this page, so it carries the only filled button.
-              "How it works" is an in-page jump, so it stays a quiet outline: a second filled
-              button would make the reader choose between two things that are not equivalent. */}
-          <div className="mt-[34px] flex flex-wrap gap-3">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdEm92Q-56f5BJUo1Vo9z5JrlnbUdOVL_A979DLOc6MXDJTsg/viewform?usp=header"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] no-underline transition hover:opacity-90"
-            >
-              Join the field test
-            </a>
-            <a
-              href="#how"
-              className="rounded-full border border-[#1e1e28] px-6 py-[13px] text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0]"
-            >
-              How it works
-            </a>
-          </div>
-          <p className="mt-4 text-xs text-[#6e6a64]">
-            Community beta · 18+ · by accepting the{' '}
-            <Link href="/terms" className="text-[#a7a29b] hover:text-[#4fe0c0]">
-              Beta&nbsp;Terms
-            </Link>{' '}
-            and{' '}
-            <Link href="/privacy" className="text-[#a7a29b] hover:text-[#4fe0c0]">
-              Privacy&nbsp;Notice
-            </Link>
-          </p>
+          {/* ⭐ 09-01: the email field REPLACED a link out to a Google Form. One field beats a
+              redirect — the reader never leaves the page and never meets a second brand. The
+              purpose sentence, the 18+ line and both legal links live inside the component, so
+              they travel with the field rather than drifting from it. */}
+          <BetaSignupForm />
         </div>
 
         {/* ── How it works ─────────────────────────────────────────────────── */}

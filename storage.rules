@@ -1,11 +1,15 @@
 rules_version = '2';
 
-// Basic Firebase Storage rules for Festival Chat
+// 🔴 09-01 — CLOSED BY DEFAULT, same reasoning as `firestore.rules`.
+//
+// This read `allow read, write: if true` for every path: any visitor could upload arbitrary files
+// to the bucket and read anything already in it. Nothing in `src/` or `functions/src` uses
+// Firebase Storage — no client SDK import, no admin usage — so closing it breaks nothing today
+// and removes an open write endpoint that was costing bandwidth risk for no feature.
 service firebase.storage {
   match /b/{bucket}/o {
-    // Allow read/write access on all files
     match /{allPaths=**} {
-      allow read, write: if true;
+      allow read, write: if false;
     }
   }
 }

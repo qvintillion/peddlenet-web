@@ -1,10 +1,25 @@
 rules_version = '2';
 
+// 🔴 09-01 — CLOSED BY DEFAULT.
+//
+// This file previously read `allow read, write: if true` for `/{document=**}`, i.e. anyone on the
+// internet could read and rewrite the entire database. That was survivable only because NOTHING
+// used Firestore: a grep of `src/` and `functions/src` for the client SDK (`firebase/firestore`,
+// `getFirestore`, `collection(`) and for `firebase-admin` returned zero hits. Closing it now
+// therefore breaks nothing — and it must be closed BEFORE the beta sign-up list lands here,
+// because that list is personal data under a GDPR notice naming a real controller.
+//
+// ⭐ THE SIGN-UP LIST IS WRITTEN BY THE SERVER, NEVER THE BROWSER. `/api/beta-signup` uses the
+// Admin SDK, which bypasses these rules entirely, so the correct client-side permission for
+// `betaSignups` is NONE. A browser that could write here could also enumerate every address on
+// the list — an email harvest — and a browser that could read it needs no bug to do so.
+//
+// Deny-by-default with no exceptions is deliberate: if a future feature needs client access, it
+// should have to add a narrow rule here and say why, rather than inherit a blanket allow.
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow read/write access on all documents
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if false;
     }
   }
 }
