@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { NetworkMark } from '@/components/NetworkMark';
 import { IrisRing } from '@/components/IrisRing';
+import { AppleMark, AndroidMark } from '@/components/PlatformMarks';
 import { BetaSignupForm } from '@/components/BetaSignupForm';
 import { MessagePathway } from '@/components/MessagePathway';
 
@@ -69,8 +70,24 @@ export default function LandingPage() {
           <p className="mt-[22px] text-[clamp(14px,2vw,17px)] text-[#a7a29b]">
             Messaging and more for festivals and off-grid events
           </p>
-          <p className="mt-3.5 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
-            Bluetooth · Ad-hoc infrastructure · iOS &amp; Android
+          {/* The glyphs replace the words "iOS & Android": they survive a narrow screen without
+              wrapping mid-phrase, and they are marks of PLATFORM SUPPORT, not store badges — the
+              app is not on either store yet. `inline-flex` keeps them on the baseline with the
+              text; the visually-hidden span is what a screen reader reads. */}
+          <p className="mt-3.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-[.06em] text-[#6e6a64]">
+            <span>Bluetooth</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>Ad-hoc infrastructure</span>
+            <span aria-hidden="true">&middot;</span>
+            <span className="inline-flex items-center gap-[7px]">
+              {/* ⭐ OPTICAL, NOT BOX, SIZING — the same rule the iris ring follows above. Matching
+                  the two heights makes Apple look SMALLER: its glyph fills its box top to bottom,
+                  while the Android robot is a squat silhouette with headroom above the antennae.
+                  The apple is set a touch taller so the pair reads as one weight. */}
+              <AppleMark className="h-[14px] w-auto" />
+              <AndroidMark className="h-[12px] w-auto" />
+              <span className="sr-only">iOS and Android</span>
+            </span>
           </p>
 
           {/* ⭐ 09-01: the email field REPLACED a link out to a Google Form. One field beats a
