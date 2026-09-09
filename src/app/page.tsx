@@ -177,6 +177,9 @@ export default function LandingPage() {
             <Link href="/privacy" className="no-underline hover:text-[#4fe0c0]">
               Privacy Notice
             </Link>
+            <Link href="/safety" className="no-underline hover:text-[#4fe0c0]">
+              Child Safety Standards
+            </Link>
           </div>
         </footer>
       </div>
