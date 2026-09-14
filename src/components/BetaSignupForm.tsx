@@ -86,8 +86,13 @@ export function BetaSignupForm() {
           narrow to even show the "you@example.com" placeholder. `basis-full` forces the break on
           phones; from `sm` up it returns to one line with the buttons. */}
       <form onSubmit={submit} className="flex flex-wrap gap-3">
-        <label htmlFor="beta-email" className="sr-only">
-          Email address
+        {/* 🏷️ 09-13 (user): a VISIBLE label, matching the platform group beside it. The field had
+            only a placeholder, so the two halves of the row sat at different heights and looked
+            unbalanced — and a placeholder is not a label: it vanishes the moment you type, which
+            is exactly when you might want to re-check what the field wanted. */}
+        <div className="flex basis-full flex-col sm:min-w-[260px] sm:flex-1 sm:basis-auto">
+        <label htmlFor="beta-email" className="mb-2 text-xs text-[#a7a29b]">
+          Email address <span className="text-[#ff5db1]">*</span>
         </label>
         <input
           id="beta-email"
@@ -99,16 +104,21 @@ export function BetaSignupForm() {
           autoComplete="email"
           aria-describedby="beta-email-note"
           aria-invalid={error ? true : undefined}
-          className="min-w-0 basis-full rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0] sm:flex-1 sm:basis-auto"
+          className="w-full min-w-0 rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0]"
         />
+        </div>
         {/* 🍎🤖 09-13 — WHICH BUILD. A RADIO GROUP, not two checkboxes: the choice is exclusive,
             and radios are what keyboard and screen-reader users already know how to operate
             (arrow keys move within the group, the legend is announced with each option).
             `basis-full` keeps it on its own row so it never competes with the email field for
             width on a phone — the same wrapping lesson the input records above. */}
-        <fieldset className="basis-full border-0 p-0 m-0">
+        <fieldset className="basis-full border-0 p-0 m-0 sm:basis-auto">
+          {/* The legend is the accessible name for the group and must stay in the DOM. On sm+
+              the question sits beside the email field where a stacked label would push the row
+              out of alignment, so it is visually hidden there and the two options — "Android"
+              and "iPhone" — carry the meaning, which they do unaided. */}
           <legend className="mb-2 text-xs text-[#a7a29b]">
-            Which phone will you test on? <span className="text-[#ff5db1]">*</span>
+            What platform? <span className="text-[#ff5db1]">*</span>
           </legend>
           <div className="flex gap-3">
             {([
@@ -140,10 +150,12 @@ export function BetaSignupForm() {
         {/* 🎯 09-13 (user): the two CTAs are CENTRED, on their own row. They used to be trailing
             items in the wrapping row, so on desktop they sat hard left with ~286px of empty
             space beside them — fine at 375px only because they happened to fill the line.
-            `basis-full` gives them the row; `flex-col` + `items-center` stacks them centred at
-            EVERY width — secondary under primary on desktop too (user), so the eye travels down
-            one column instead of hopping sideways to a second, differently-weighted target. */}
-        <div className="flex basis-full flex-col items-center gap-3">
+            09-13 (2nd pass, user): LEFT-aligned, with breathing room above — the platform
+            question and the CTAs were touching, so the required choice read as part of the
+            button cluster rather than as its own step. "How it works" is now a TERTIARY link in
+            transport green, not an outlined button: two pill buttons of equal size competed for
+            the tap, and only one of them is the action this form exists for. */}
+        <div className="mt-3 flex basis-full flex-col items-stretch gap-3 sm:mt-4 sm:flex-row sm:items-center sm:gap-2">
           <button
             type="submit"
             disabled={state === 'sending' || !platform}
@@ -153,7 +165,7 @@ export function BetaSignupForm() {
           </button>
           <a
             href="#how"
-            className="w-full whitespace-nowrap rounded-full border border-[#1e1e28] px-6 py-[13px] text-center text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0] sm:w-auto sm:min-w-[210px]"
+            className="w-full whitespace-nowrap px-6 py-2 text-center text-sm font-bold text-[#4fe0c0] no-underline transition hover:opacity-80 sm:w-auto sm:text-left"
           >
             How it works
           </a>
