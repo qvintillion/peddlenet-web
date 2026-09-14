@@ -137,19 +137,27 @@ export function BetaSignupForm() {
             ))}
           </div>
         </fieldset>
-        <button
-          type="submit"
-          disabled={state === 'sending' || !platform}
-          className="flex-1 whitespace-nowrap rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] transition hover:opacity-90 disabled:opacity-60 sm:flex-none"
-        >
-          {state === 'sending' ? 'Sending…' : 'Join the field test'}
-        </button>
-        <a
-          href="#how"
-          className="whitespace-nowrap rounded-full border border-[#1e1e28] px-6 py-[13px] text-center text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0]"
-        >
-          How it works
-        </a>
+        {/* 🎯 09-13 (user): the two CTAs are CENTRED, on their own row. They used to be trailing
+            items in the wrapping row, so on desktop they sat hard left with ~286px of empty
+            space beside them — fine at 375px only because they happened to fill the line.
+            `basis-full` gives them the row; `flex-col` + `items-center` stacks them centred at
+            EVERY width — secondary under primary on desktop too (user), so the eye travels down
+            one column instead of hopping sideways to a second, differently-weighted target. */}
+        <div className="flex basis-full flex-col items-center gap-3">
+          <button
+            type="submit"
+            disabled={state === 'sending' || !platform}
+            className="w-full whitespace-nowrap rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] transition hover:opacity-90 disabled:opacity-60 sm:w-auto sm:min-w-[210px]"
+          >
+            {state === 'sending' ? 'Sending…' : 'Join the field test'}
+          </button>
+          <a
+            href="#how"
+            className="w-full whitespace-nowrap rounded-full border border-[#1e1e28] px-6 py-[13px] text-center text-sm font-bold text-[#f4f1ea] no-underline transition hover:border-[#4fe0c0] sm:w-auto sm:min-w-[210px]"
+          >
+            How it works
+          </a>
+        </div>
       </form>
 
       {error && (
