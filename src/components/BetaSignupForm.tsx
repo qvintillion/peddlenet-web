@@ -20,19 +20,33 @@ import Link from 'next/link';
  */
 export function BetaSignupForm() {
   const [email, setEmail] = useState('');
+  /**
+   * 🍎🤖 09-13 — REQUIRED, and deliberately un-preselected. The two builds ship on different
+   * tracks (Play testing track vs TestFlight, which is capped and needs the address registered
+   * BEFORE an invite exists), so this decides which invite someone gets. A default would file
+   * whoever did not notice onto the wrong track, silently — the failure nobody detects. `null`
+   * until chosen, and the submit button stays disabled, so the required-ness is visible rather
+   * than only enforced on submit.
+   */
+  const [platform, setPlatform] = useState<'android' | 'ios' | null>(null);
   const [state, setState] = useState<'idle' | 'sending' | 'done'>('idle');
   const [error, setError] = useState<string | null>(null);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (state === 'sending') return;
+    // Belt to the disabled button's braces: a form can still be submitted by keyboard.
+    if (!platform) {
+      setError('Please choose Android or iPhone so we send you the right build.');
+      return;
+    }
     setState('sending');
     setError(null);
     try {
       const res = await fetch('/api/beta-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, platform }),
       });
       if (!res.ok) {
         // ⚠️ Surface the server's own message: a 503 means "not stored", and telling the reader
@@ -87,9 +101,45 @@ export function BetaSignupForm() {
           aria-invalid={error ? true : undefined}
           className="min-w-0 basis-full rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0] sm:flex-1 sm:basis-auto"
         />
+        {/* 🍎🤖 09-13 — WHICH BUILD. A RADIO GROUP, not two checkboxes: the choice is exclusive,
+            and radios are what keyboard and screen-reader users already know how to operate
+            (arrow keys move within the group, the legend is announced with each option).
+            `basis-full` keeps it on its own row so it never competes with the email field for
+            width on a phone — the same wrapping lesson the input records above. */}
+        <fieldset className="basis-full border-0 p-0 m-0">
+          <legend className="mb-2 text-xs text-[#a7a29b]">
+            Which phone will you test on? <span className="text-[#ff5db1]">*</span>
+          </legend>
+          <div className="flex gap-3">
+            {([
+              { value: 'android', label: 'Android' },
+              { value: 'ios', label: 'iPhone' },
+            ] as const).map((opt) => (
+              <label
+                key={opt.value}
+                className={`flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border px-5 py-[11px] text-sm font-bold transition ${
+                  platform === opt.value
+                    ? 'border-[#4fe0c0] bg-[#4fe0c0]/10 text-[#4fe0c0]'
+                    : 'border-[#1e1e28] text-[#f4f1ea] hover:border-[#4fe0c0]'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="platform"
+                  value={opt.value}
+                  checked={platform === opt.value}
+                  onChange={() => setPlatform(opt.value)}
+                  required
+                  className="sr-only"
+                />
+                {opt.label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
         <button
           type="submit"
-          disabled={state === 'sending'}
+          disabled={state === 'sending' || !platform}
           className="flex-1 whitespace-nowrap rounded-full border border-[#4fe0c0] bg-[#4fe0c0] px-6 py-[13px] text-sm font-bold text-[#08080b] transition hover:opacity-90 disabled:opacity-60 sm:flex-none"
         >
           {state === 'sending' ? 'Sending…' : 'Join the field test'}
