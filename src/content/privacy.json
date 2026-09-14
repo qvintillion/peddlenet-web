@@ -10,7 +10,7 @@
   "Message content — created, transmitted, relayed across other participants' devices, outposts and peddlers, and stored locally on those devices until it is delivered or expires. There is no server in the beta: messages are not uploaded to us and never pass through our systems.",
   "Optional location — only if you enable a feature that uses it (e.g., a friend compass); off by default.",
   "Crash reports and basic app-usage analytics — collected by Google Firebase (Crashlytics and Analytics) so we can find and fix faults during the test. These describe how the app behaves; they do not carry your message content.",
-  "Email address — only if you enter one on peddlenet.app to request a beta invitation. It is not used inside the app, is never shown to other participants, and is not linked to your display name, device identity, or anything you send.",
+  "Email address, and which phone you plan to test on (Android or iPhone) — only if you enter them on peddlenet.app to request a beta invitation. The platform answer exists solely because the two builds are distributed differently, so we know which invitation to send you. Neither is used inside the app, neither is ever shown to other participants, and neither is linked to your display name, device identity, or anything you send.",
   "3. Why, and our legal basis (GDPR)",
   "To operate the Service — deliver and relay messages between participants' devices and show presence/rosters: performance of the terms you accept (contract), and our legitimate interest in a working network.",
   "For crash reports, app-usage analytics, and any optional location features: your consent, which you can withdraw at any time.",

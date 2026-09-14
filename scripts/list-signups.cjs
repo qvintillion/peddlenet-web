@@ -5,6 +5,8 @@
  *   node scripts/list-signups.cjs                    # table, newest first
  *   node scripts/list-signups.cjs --csv              # csv, for a mail merge
  *   node scripts/list-signups.cjs --emails           # bare addresses, one per line
+ *   node scripts/list-signups.cjs --emails ios       # …just the iPhone testers (TestFlight)
+ *   node scripts/list-signups.cjs --emails android   # …just the Android testers (Play track)
  *   node scripts/list-signups.cjs --remove <email>   # honour a removal request
  *
  * ⭐ WHY A SCRIPT AND NOT JUST THE CONSOLE. `firestore.rules` is deny-all, so no browser client
@@ -103,19 +105,32 @@ function credentials() {
       joined: x.createdAt?.toDate?.().toISOString().replace('T', ' ').slice(0, 16) ?? '',
       source: x.source ?? '',
       purpose: x.purpose ?? '',
+      // 09-13: which build to send. '—' for rows written BEFORE the field existed — shown, not
+      // guessed: those people still need asking, and a default would hide that.
+      platform: x.platform ?? '—',
     };
   });
 
   const mode = process.argv[2];
+  // 09-13: `--emails android` / `--emails ios` — the actual invite workflow is one platform at a
+  // time (a Play testing track vs a capped TestFlight list), so filtering belongs here rather
+  // than in whatever spreadsheet it would otherwise be pasted into.
+  const platformFilter = process.argv[3];
+  const filtered = platformFilter ? rows.filter((r) => r.platform === platformFilter) : rows;
   if (mode === '--emails') {
-    rows.forEach((r) => console.log(r.email));
+    filtered.forEach((r) => console.log(r.email));
   } else if (mode === '--csv') {
-    console.log('email,joined,source,purpose');
-    rows.forEach((r) => console.log(`${r.email},${r.joined},${r.source},${r.purpose}`));
+    console.log('email,joined,platform,source,purpose');
+    filtered.forEach((r) => console.log(`${r.email},${r.joined},${r.platform},${r.source},${r.purpose}`));
   } else {
-    console.log(`\n${rows.length} beta sign-up${rows.length === 1 ? '' : 's'}\n`);
+    const android = rows.filter((r) => r.platform === 'android').length;
+    const ios = rows.filter((r) => r.platform === 'ios').length;
+    const unknown = rows.length - android - ios;
+    console.log(`\n${rows.length} beta sign-up${rows.length === 1 ? '' : 's'}  ` +
+      `(${android} android · ${ios} ios${unknown ? ` · ${unknown} unknown` : ''})\n`);
     const w = Math.max(5, ...rows.map((r) => r.email.length));
-    rows.forEach((r) => console.log(`  ${r.joined}   ${r.email.padEnd(w)}   ${r.source}`));
+    filtered.forEach((r) =>
+      console.log(`  ${r.joined}   ${r.email.padEnd(w)}   ${r.platform.padEnd(7)} ${r.source}`));
     console.log('');
   }
   process.exit(0);

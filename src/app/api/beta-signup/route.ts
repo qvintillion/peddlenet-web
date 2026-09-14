@@ -27,6 +27,18 @@ const COLLECTION = 'betaSignups';
  * and the only cost of a bad address here is one bounced invite.
  */
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+/**
+ * Which platform the tester will run the beta on. REQUIRED (09-13): the two builds ship on
+ * different tracks — Android via a Play testing track, iOS via TestFlight, which is capped and
+ * needs the address added to the build BEFORE an invite can be sent. Without this the list is
+ * one undifferentiated column and every invite round starts by asking each person again.
+ *
+ * ⚠️ Validated as a closed set server-side, not merely trusted from the form: this value decides
+ * which invite someone gets, so a typo'd or injected string would silently strand a tester.
+ */
+const PLATFORMS = ['android', 'ios'] as const;
+type Platform = (typeof PLATFORMS)[number];
 const MAX_EMAIL_LENGTH = 254; // RFC 5321 practical maximum
 
 function adminApp(): App | null {
@@ -57,8 +69,9 @@ function adminApp(): App | null {
 
 export async function POST(request: NextRequest) {
   let email: unknown;
+  let platform: unknown;
   try {
-    ({ email } = await request.json());
+    ({ email, platform } = await request.json());
   } catch {
     return NextResponse.json({ error: 'Malformed request.' }, { status: 400 });
   }
@@ -71,6 +84,17 @@ export async function POST(request: NextRequest) {
   if (normalized.length > MAX_EMAIL_LENGTH || !EMAIL.test(normalized)) {
     return NextResponse.json({ error: "That doesn't look like an email address." }, { status: 400 });
   }
+
+  // Required, and rejected rather than defaulted. Defaulting to "android" would quietly file
+  // every iOS tester on the wrong track — a silent wrong answer beats no answer only if someone
+  // notices, and nobody would.
+  if (typeof platform !== 'string' || !PLATFORMS.includes(platform as Platform)) {
+    return NextResponse.json(
+      { error: 'Please choose whether you\'ll test on Android or iPhone.' },
+      { status: 400 },
+    );
+  }
+  const devicePlatform = platform as Platform;
 
   const app = adminApp();
   if (!app) {
@@ -93,6 +117,9 @@ export async function POST(request: NextRequest) {
       .set(
         {
           email: normalized,
+          // 09-13: which build to send. Merged like the rest, so someone who re-submits with a
+          // different answer corrects their own row rather than creating a second one.
+          platform: devicePlatform,
           createdAt: FieldValue.serverTimestamp(),
           // What they actually agreed to, recorded at the moment of consent. Purpose limitation
           // is only meaningful if the record says what the purpose WAS.
