@@ -86,8 +86,13 @@ export function BetaSignupForm() {
           narrow to even show the "you@example.com" placeholder. `basis-full` forces the break on
           phones; from `sm` up it returns to one line with the buttons. */}
       <form onSubmit={submit} className="flex flex-wrap gap-3">
-        <label htmlFor="beta-email" className="sr-only">
-          Email address
+        {/* 🏷️ 09-13 (user): a VISIBLE label, matching the platform group beside it. The field had
+            only a placeholder, so the two halves of the row sat at different heights and looked
+            unbalanced — and a placeholder is not a label: it vanishes the moment you type, which
+            is exactly when you might want to re-check what the field wanted. */}
+        <div className="flex basis-full flex-col sm:min-w-[260px] sm:flex-1 sm:basis-auto">
+        <label htmlFor="beta-email" className="mb-2 text-xs text-[#a7a29b]">
+          Email address <span className="text-[#ff5db1]">*</span>
         </label>
         <input
           id="beta-email"
@@ -99,8 +104,9 @@ export function BetaSignupForm() {
           autoComplete="email"
           aria-describedby="beta-email-note"
           aria-invalid={error ? true : undefined}
-          className="min-w-0 basis-full rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0] sm:min-w-[260px] sm:flex-1 sm:basis-auto"
+          className="w-full min-w-0 rounded-full border border-[#1e1e28] bg-[#0d0d12] px-5 py-[13px] text-sm text-[#f4f1ea] placeholder-[#6e6a64] outline-none transition focus:border-[#4fe0c0]"
         />
+        </div>
         {/* 🍎🤖 09-13 — WHICH BUILD. A RADIO GROUP, not two checkboxes: the choice is exclusive,
             and radios are what keyboard and screen-reader users already know how to operate
             (arrow keys move within the group, the legend is announced with each option).
@@ -111,17 +117,9 @@ export function BetaSignupForm() {
               the question sits beside the email field where a stacked label would push the row
               out of alignment, so it is visually hidden there and the two options — "Android"
               and "iPhone" — carry the meaning, which they do unaided. */}
-          <legend className="mb-2 text-xs text-[#a7a29b] sm:sr-only">
-            Which phone will you test on? <span className="text-[#ff5db1]">*</span>
+          <legend className="mb-2 text-xs text-[#a7a29b]">
+            What platform? <span className="text-[#ff5db1]">*</span>
           </legend>
-          {/* 🟥 The visually-hidden legend above takes the REQUIREDNESS with it on sm+, so the
-              choice looked optional on desktop until submit was attempted. This restores the one
-              bit that cannot be inferred from "Android | iPhone" — that an answer is needed —
-              beside the options where the eye already is. Hidden on phones, where the full
-              question is visible. */}
-          <p className="sr-only mb-2 text-xs text-[#a7a29b] sm:not-sr-only sm:mb-2">
-            Which phone? <span className="text-[#ff5db1]">*</span>
-          </p>
           <div className="flex gap-3">
             {([
               { value: 'android', label: 'Android' },
