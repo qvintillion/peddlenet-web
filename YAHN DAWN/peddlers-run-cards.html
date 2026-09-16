@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Peddler's Run — post cards</title>
+<style>
+  :root { --ink:#111; --mid:#555; --rule:#ccc; --amber:#8a6000; }
+  * { box-sizing: border-box; }
+  html { background:#e9e7e2; }
+  body {
+    margin:0; padding:24px 16px; color:var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .sheet {
+    background:#fff; max-width:760px; margin:0 auto 24px; padding:56px 56px 48px;
+    box-shadow:0 1px 4px rgba(0,0,0,.14);
+    display:flex; flex-direction:column;
+  }
+  .rule { border:0; border-top:1px solid var(--rule); margin:0; }
+
+  /* ── post card ─────────────────────────────────────────── */
+  .card { text-align:center; min-height:860px; justify-content:center; gap:4px; }
+  .diamond { font-size:44px; color:var(--amber); line-height:1; margin-bottom:18px; }
+  .kicker { font-size:15px; letter-spacing:.28em; text-transform:uppercase; color:var(--mid); }
+  .zone {
+    font-size:clamp(38px,7vw,62px); font-weight:700; letter-spacing:-.015em;
+    margin:14px 0 30px; line-height:1.05;
+  }
+  .join { font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--mid); }
+  .code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size:clamp(28px,5.6vw,46px); font-weight:700; letter-spacing:-.01em;
+    margin:12px 0 4px; padding:20px 12px; border:3px solid var(--ink);
+    word-break:break-all; line-height:1.15;
+  }
+  .codenote { font-size:13px; color:var(--mid); margin-bottom:34px; }
+  .instr { font-size:clamp(19px,3vw,25px); line-height:1.5; max-width:30ch; margin:0 auto; }
+  .instr strong { border-bottom:3px solid var(--amber); }
+  .bead {
+    margin-top:34px; padding-top:22px; border-top:1px solid var(--rule);
+    font-size:20px; letter-spacing:.04em;
+  }
+  .foot { margin-top:auto; padding-top:30px; font-size:12.5px; color:var(--mid); line-height:1.6; }
+
+  /* ── crew sheet ────────────────────────────────────────── */
+  .crew h1 { font-size:30px; margin:0 0 4px; letter-spacing:-.01em; }
+  .crew .sub { font-size:14px; color:var(--mid); margin:0 0 26px; }
+  .crew h2 {
+    font-size:12.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--mid);
+    margin:30px 0 12px; font-weight:700;
+  }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:9px 10px 9px 0; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); font-weight:700; }
+  td.c { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:13px; font-weight:700; white-space:nowrap; }
+  ul { margin:0; padding-left:0; list-style:none; font-size:14.5px; line-height:1.85; }
+  ul li::before { content:"☐"; margin-right:10px; color:var(--mid); }
+  ol { margin:0; padding-left:20px; font-size:14.5px; line-height:1.7; }
+  ol li { margin-bottom:7px; }
+  .drop {
+    border-left:3px solid var(--amber); padding:4px 0 4px 15px; margin:14px 0 20px;
+    font-size:14.5px; line-height:1.6;
+  }
+  .drop .who { font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mid); display:block; margin-bottom:5px; }
+  .warn { background:#f7f2e4; border-left:3px solid var(--amber); padding:13px 16px; font-size:14px; line-height:1.6; margin:16px 0; }
+
+  @media print {
+    html, body { background:#fff; }
+    body { padding:0; }
+    .sheet { box-shadow:none; max-width:none; margin:0; padding:14mm 16mm; page-break-after:always; min-height:0; }
+    .sheet:last-child { page-break-after:auto; }
+    .card { min-height:240mm; }
+  }
+  @page { margin:10mm; }
+</style>
+</head>
+<body>
+
+<!-- ── POST CARDS ─────────────────────────────────────────── -->
+
+<section class="sheet card">
+  <div class="diamond">&#9670;</div>
+  <div class="kicker">The Peddler&rsquo;s Run</div>
+  <div class="zone">Main Stage</div>
+  <div class="join">Join this room</div>
+  <div class="code">amber-lantern-4417</div>
+  <div class="codenote">Type it into PeddleNet exactly as written</div>
+  <p class="instr">Then <strong>stand here for 30 seconds</strong>. The post will hand you a clue.</p>
+  <div class="bead">Take one bead. &nbsp;&#9670;&nbsp; Take the word.</div>
+  <div class="foot">
+    No signal needed, and no internet. The message is held by the post itself and travels the last
+    few metres by radio, straight to the phone in your hand.
+  </div>
+</section>
+
+<section class="sheet card">
+  <div class="diamond">&#9670;</div>
+  <div class="kicker">The Peddler&rsquo;s Run</div>
+  <div class="zone">Swirl Bridge</div>
+  <div class="join">Join this room</div>
+  <div class="code">velvet-ember-3852</div>
+  <div class="codenote">Type it into PeddleNet exactly as written</div>
+  <p class="instr">Then <strong>stand here for 30 seconds</strong>. The post will hand you a clue.</p>
+  <div class="bead">Take one bead. &nbsp;&#9670;&nbsp; Take the word.</div>
+  <div class="foot">
+    No signal needed, and no internet. The message is held by the post itself and travels the last
+    few metres by radio, straight to the phone in your hand.
+  </div>
+</section>
+
+<section class="sheet card">
+  <div class="diamond">&#9670;</div>
+  <div class="kicker">The Peddler&rsquo;s Run</div>
+  <div class="zone">Meadow Gate</div>
+  <div class="join">Join this room</div>
+  <div class="code">copper-thistle-5106</div>
+  <div class="codenote">Type it into PeddleNet exactly as written</div>
+  <p class="instr">Then <strong>stand here for 30 seconds</strong>. The post will hand you a clue.</p>
+  <div class="bead">Take one bead. &nbsp;&#9670;&nbsp; Take the word.</div>
+  <div class="foot">
+    No signal needed, and no internet. The message is held by the post itself and travels the last
+    few metres by radio, straight to the phone in your hand.
+  </div>
+</section>
+
+<section class="sheet card">
+  <div class="diamond">&#9670;</div>
+  <div class="kicker">The Peddler&rsquo;s Run</div>
+  <div class="zone">&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;</div>
+  <div class="join">Join this room</div>
+  <div class="code">quiet-harbor-2741</div>
+  <div class="codenote">Type it into PeddleNet exactly as written</div>
+  <p class="instr">Then <strong>stand here for 30 seconds</strong>. The post will hand you a clue.</p>
+  <div class="bead">Take one bead. &nbsp;&#9670;&nbsp; Take the word.</div>
+  <div class="foot">
+    No signal needed, and no internet. The message is held by the post itself and travels the last
+    few metres by radio, straight to the phone in your hand.
+  </div>
+</section>
+
+<!-- ── CREW SEEDING SHEET ─────────────────────────────────── -->
+
+<section class="sheet crew">
+  <h1>Seeding sheet &mdash; crew only</h1>
+  <p class="sub">Yahn Dawn, Sept 17&ndash;20 2026 &middot; build 1.8.1-beta.2 / 676 &middot; do not nail this one up</p>
+
+  <h2>The four posts</h2>
+  <table>
+    <tr><th>#</th><th>Zone</th><th>Hunt room ID</th><th>Word</th><th>Points to</th></tr>
+    <tr><td>1</td><td>main-stage</td><td class="c">amber-lantern-4417</td><td><b>SALT</b></td><td>swirl-bridge</td></tr>
+    <tr><td>2</td><td>swirl-bridge</td><td class="c">velvet-ember-3852</td><td><b>EMBER</b></td><td>meadow-gate</td></tr>
+    <tr><td>3</td><td>meadow-gate</td><td class="c">copper-thistle-5106</td><td><b>WILLOW</b></td><td>post four</td></tr>
+    <tr><td>4</td><td>____________</td><td class="c">quiet-harbor-2741</td><td><b>DAWN</b></td><td>trading post</td></tr>
+  </table>
+  <p style="font-size:14px;margin:14px 0 0">Phrase: <b>salt &middot; ember &middot; willow &middot; dawn</b></p>
+
+  <h2>What to drop, at each post</h2>
+  <p style="font-size:14px;color:#555;margin:0 0 4px">Join the hunt room, stand at the post, drop off &mdash; then wait for the confirmation.</p>
+
+  <div class="drop"><span class="who">Post 1 &middot; main-stage</span>
+    Your word is <b>SALT</b>. Carry it. The next post stands where the water bends &mdash;
+    <b>swirl-bridge</b>. Its card will give you the room.</div>
+  <div class="drop"><span class="who">Post 2 &middot; swirl-bridge</span>
+    Your word is <b>EMBER</b>. Two down. Walk out to where the field opens &mdash;
+    <b>meadow-gate</b>.</div>
+  <div class="drop"><span class="who">Post 3 &middot; meadow-gate</span>
+    Your word is <b>WILLOW</b>. One post left, and it is the quiet one. &nbsp;____________</div>
+  <div class="drop"><span class="who">Post 4</span>
+    Your word is <b>DAWN</b>. That is all four. Bring them in order to the trading post and say
+    them out loud.</div>
+
+  <div class="warn">
+    <b>Wait for &ldquo;dropped at the outpost&rdquo; before you walk away.</b> That confirmation
+    fires only once the post has actually stored the clue. No confirmation means you have seeded
+    an empty post &mdash; and it will look completely normal.
+  </div>
+
+  <h2>Every morning, per post</h2>
+  <ul>
+    <li>Outpost is back in its <b>zone</b> room after the reboot</li>
+    <li>App <b>foregrounded</b>, in its room, on mains (screen off fine, backgrounded is not)</li>
+    <li>Re-drop the clue &mdash; yesterday&rsquo;s has hit its 24 h TTL</li>
+    <li>Wait for the &ldquo;dropped at the outpost&rdquo; confirmation</li>
+    <li>Second phone joins the hunt room, walks up, <b>collects</b> &mdash; or the post is dead</li>
+    <li>Card still up, bead tin topped up</li>
+  </ul>
+
+  <h2>&ldquo;It&rsquo;s not working&rdquo;</h2>
+  <ol>
+    <li><b>Are they in the hunt room?</b> Check the room ID on their screen against the card.</li>
+    <li><b>Standing still?</b> 30 seconds, within a few metres. Walking past is not enough.</li>
+    <li><b>Outpost foregrounded and in its room?</b> Its own screen looks healthy either way &mdash;
+        that is the trap. Check another phone can see it.</li>
+    <li><b>Pill flickering every ~90 s?</b> #536. Cosmetic. Collection still works. Leave it.</li>
+    <li><b>Slow, or &ldquo;Unreachable&rdquo; while standing right there?</b> Stale MAC.
+        <b>Wait 5 minutes.</b> If it persists, restart the app on the phone running <b>longest</b>
+        &mdash; restarting the wrong end does nothing.</li>
+    <li><b>Still dead?</b> Hand them the bead and the word. The game continues.</li>
+  </ol>
+
+  <div class="warn" style="margin-top:22px">
+    Beads are the game. The mesh is how it feels like magic when it works. Never promise the app.
+  </div>
+</section>
+
+</body>
+</html>
