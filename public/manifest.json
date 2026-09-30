@@ -1,9 +1,18 @@
 {
+  "id": "/",
   "name": "Festival Chat",
   "short_name": "FestChat",
   "description": "Connect with people nearby without internet at festivals",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "launch_handler": {
+    "client_mode": [
+      "navigate-existing",
+      "auto"
+    ]
+  },
+  "handle_links": "preferred",
   "background_color": "#4C1D95",
   "theme_color": "#4C1D95",
   "icons": [
@@ -20,4 +29,4 @@
       "purpose": "any maskable"
     }
   ]
-} 
+}
