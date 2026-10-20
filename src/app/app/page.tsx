@@ -9,8 +9,8 @@ import { CompactGlobalNotificationBanner } from '@/components/CompactGlobalNotif
 import { JoinedRooms } from '@/components/JoinedRooms';
 import { RecentRooms } from '@/components/RecentRooms';
 import { PublicRooms } from '@/components/PublicRooms';
-import { generateRoomCode } from '@/utils/generate-room-code';
 import { ServerUtils } from '@/utils/server-utils';
+import { mintCrew, rememberSecret } from '@/lib/room-secret';
 
 export default function HomePage() {
   const router = useRouter();
@@ -64,9 +64,12 @@ export default function HomePage() {
         console.log('📝 Set display name:', userName);
       }
 
-      // Generate memorable room code - this IS the room ID
-      const roomCode = generateRoomCode();
-      console.log('🏷️ Generated room code:', roomCode);
+      // 🔑 ADR-0009 Stage 1a (10-20): a new crew is a 128-bit SECRET with a derived id, the same
+      // derivation as both apps (pinned by src/lib/room-secret.test.ts). It used to be
+      // `generateRoomCode()`'s `adjective-noun-NN`, which was the id AND the only gate, at ~18 bits.
+      const { roomId: roomCode, shareCode } = await mintCrew();
+      rememberSecret(roomCode, shareCode);
+      console.log('🏷️ Minted crew:', roomCode);
 
       // Store the display name for this room (localStorage for immediate access)
       localStorage.setItem(`room:${roomCode}:name`, roomName);
@@ -94,7 +97,8 @@ export default function HomePage() {
         console.warn('⚠️ Could not reach server, using localStorage only:', error);
       }
 
-      const targetUrl = `/chat/${roomCode}`;
+      // The secret rides in the fragment, so the landing can show the code and hand it to the app.
+      const targetUrl = `/chat/${roomCode}#s=${shareCode}`;
       console.log('🗺️ Navigating to:', targetUrl);
 
       // Use Next.js router now that we have SSR
