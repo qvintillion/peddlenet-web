@@ -3,8 +3,13 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { InviteLanding } from '@/components/InviteLanding';
+import nextDynamic from 'next/dynamic';
 import { webChatEnabled } from '@/lib/install-links';
-import ChatRoom from './ChatRoom';
+
+// LAZY: the 890-line browser chat drags in socket.io, qrcode and the diagnostics panels, and the
+// invite landing is what nearly every visit to this route renders. Loaded only on "Continue in
+// browser". (`nextDynamic`, because this module already exports the route config `dynamic`.)
+const ChatRoom = nextDynamic(() => import('./ChatRoom'), { ssr: false });
 
 // Disable static generation for chat pages to avoid SSR issues
 export const dynamic = 'force-dynamic';

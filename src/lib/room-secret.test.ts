@@ -5,7 +5,7 @@
 // If this file and that one ever disagree, a shared invite opens a different crew in the browser.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkInvite, decodeShareCode, encodeShareCode, mintCrew, roomIdFor } from './room-secret.ts';
+import { appLink, checkInvite, decodeShareCode, encodeShareCode, mintCrew, roomIdFor } from './room-secret.ts';
 
 const ascending = Uint8Array.from({ length: 16 }, (_, i) => i);
 const ones = new Uint8Array(16).fill(0xff);
@@ -77,4 +77,17 @@ test('decode tolerates what a paste does and round-trips', async () => {
 test('mintCrew is not degenerate', async () => {
   const codes = new Set(await Promise.all(Array.from({ length: 64 }, async () => (await mintCrew()).shareCode)));
   assert.equal(codes.size, 64);
+});
+
+test('appLink round-trips through the same parser rules, with %20 spaces and %2B pluses', async () => {
+  const url = new URL(
+    // `peddlenet:` is not a special scheme to WHATWG URL, so read it as https for the parts.
+    appLink('llmvnq6uyfad', 'C++ Crew Test', 'pn1-op3gcd47fhu2zn5dg5ezvi6h5q').replace('peddlenet://chat/', 'https://x/chat/'),
+  );
+  assert.equal(url.search, '?roomName=C%2B%2B%20Crew%20Test');
+  assert.equal(new URLSearchParams(url.search).get('roomName'), 'C++ Crew Test');
+  assert.deepEqual(await checkInvite('llmvnq6uyfad', url.hash), {
+    kind: 'secret', roomId: 'llmvnq6uyfad', shareCode: 'pn1-op3gcd47fhu2zn5dg5ezvi6h5q',
+  });
+  assert.equal(appLink('cosmic-dragon-42', null, null), 'peddlenet://chat/cosmic-dragon-42');
 });

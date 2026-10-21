@@ -86,6 +86,17 @@ export async function mintCrew(): Promise<{ roomId: string; shareCode: string }>
   return { roomId: await roomIdFor(secret), shareCode: encodeShareCode(secret) };
 }
 
+/**
+ * The invite in the apps' `peddlenet://` scheme, carrying the same `#s=`. A space is `%20` and a
+ * real `+` is `%2B`: the form BOTH app parsers decode identically (the 10-20 `+`-for-space bug
+ * ran on exactly this seam, so the invite format lives here, beside [checkInvite], and nowhere else).
+ */
+export function appLink(roomId: string, name: string | null, shareCode: string | null): string {
+  const query = name ? `?roomName=${encodeURIComponent(name)}` : '';
+  const fragment = shareCode ? `#s=${shareCode}` : '';
+  return `peddlenet://chat/${encodeURIComponent(roomId)}${query}${fragment}`;
+}
+
 export type InviteCheck =
   | { kind: 'secret'; roomId: string; shareCode: string }
   | { kind: 'legacy'; roomId: string }

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { checkInvite, rememberSecret, type InviteCheck } from '@/lib/room-secret';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { NetworkMark } from '@/components/NetworkMark';
+import { appLink, checkInvite, rememberSecret, type InviteCheck } from '@/lib/room-secret';
 import { installLinks, webChatEnabled } from '@/lib/install-links';
 
 /**
@@ -24,6 +26,8 @@ type Resolved = { check: InviteCheck; name: string | null };
 export function InviteLanding({ roomId, onContinueInBrowser }: Props) {
   const [resolved, setResolved] = useState<Resolved | null>(null);
   const [copied, setCopied] = useState(false);
+  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (copiedTimer.current) clearTimeout(copiedTimer.current); }, []);
 
   useEffect(() => {
     let live = true;
@@ -52,14 +56,16 @@ export function InviteLanding({ roomId, onContinueInBrowser }: Props) {
   if (resolved.check.kind === 'damaged') return <Damaged />;
 
   const { check, name } = resolved;
-  const code = check.kind === 'secret' ? check.shareCode : check.roomId;
-  const appUrl = appLink(roomId, name, check.kind === 'secret' ? check.shareCode : null);
+  const shareCode = check.kind === 'secret' ? check.shareCode : null;
+  const code = shareCode ?? check.roomId;
+  const appUrl = appLink(roomId, name, shareCode);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
+      if (copiedTimer.current) clearTimeout(copiedTimer.current);
+      copiedTimer.current = setTimeout(() => setCopied(false), 1600);
     } catch {
       // Clipboard can be denied (insecure context, permissions); the code stays selectable.
     }
@@ -141,19 +147,14 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <main className="min-h-screen bg-[#08080b] font-[family-name:var(--font-jetbrains-mono)] leading-relaxed text-[#f4f1ea] antialiased">
       <div className="mx-auto max-w-[560px] px-6 pb-16 pt-14">
-        <a href="/" className="mb-10 inline-block text-xs tracking-[.14em] text-[#6e6a64] hover:text-[#a7a29b]">PEDDLENET</a>
+        {/* The home page's header pairing (mark + wordmark). Not its optical offset, which is
+            tuned to the hero's iris ring and has no counterpart here. */}
+        <Link href="/" aria-label="PeddleNet home" className="mb-10 inline-flex items-center gap-2.5 text-[13px] font-bold tracking-[.04em] text-[#f4f1ea] no-underline opacity-90 transition-opacity hover:opacity-100">
+          <NetworkMark className="block h-auto w-[26px] flex-none" />
+          <span>PeddleNet</span>
+        </Link>
         {children}
       </div>
     </main>
   );
-}
-
-/**
- * The same invite in the apps' `peddlenet://` scheme. Space is `%20` and a real `+` is `%2B`, the
- * form BOTH app parsers decode identically (the 10-20 `+`-for-space bug ran on exactly this seam).
- */
-function appLink(roomId: string, name: string | null, shareCode: string | null): string {
-  const query = name ? `?roomName=${encodeURIComponent(name)}` : '';
-  const fragment = shareCode ? `#s=${shareCode}` : '';
-  return `peddlenet://chat/${encodeURIComponent(roomId)}${query}${fragment}`;
 }

@@ -3,47 +3,9 @@
  * Format: adjective-noun-number (e.g., "cosmic-dragon-42")
  */
 
-const ADJECTIVES = [
-  'happy', 'bright', 'cosmic', 'electric', 'glowing', 'radiant', 'vibrant', 'stellar',
-  'lunar', 'solar', 'neon', 'crystal', 'golden', 'silver', 'rainbow', 'cosmic',
-  'mystic', 'magic', 'wild', 'fierce', 'bold', 'brave', 'swift', 'clever',
-  'dancing', 'flying', 'jumping', 'running', 'spinning', 'twirling', 'soaring',
-  'blazing', 'shining', 'sparkling', 'glittering', 'dazzling', 'luminous',
-  'purple', 'azure', 'crimson', 'emerald', 'sapphire', 'amber', 'coral', 'jade',
-  'velvet', 'silk', 'satin', 'pearl', 'diamond', 'ruby', 'topaz', 'opal'
-];
-
-const NOUNS = [
-  'dragon', 'phoenix', 'tiger', 'eagle', 'wolf', 'bear', 'lion', 'hawk',
-  'falcon', 'raven', 'swan', 'dolphin', 'whale', 'shark', 'octopus', 'jellyfish',
-  'star', 'moon', 'sun', 'comet', 'meteor', 'galaxy', 'nebula', 'aurora',
-  'thunder', 'lightning', 'storm', 'wind', 'rain', 'cloud', 'rainbow', 'sunrise',
-  'sunset', 'twilight', 'dawn', 'dusk', 'midnight', 'daylight', 'moonlight',
-  'forest', 'ocean', 'mountain', 'river', 'valley', 'desert', 'meadow', 'garden',
-  'flame', 'ember', 'spark', 'blaze', 'inferno', 'firefly', 'lantern', 'beacon'
-];
-
-/**
- * Generate a random memorable room code
- * @returns Room code in format "adjective-noun-number"
- */
-export function generateRoomCode(): string {
-  const adjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
-  const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
-  const number = Math.floor(Math.random() * 90) + 10; // 10-99
-
-  return `${adjective}-${noun}-${number}`;
-}
-
-/**
- * Validate if a string is a valid room code format
- * @param code - The code to validate
- * @returns True if valid format
- */
-export function isValidRoomCode(code: string): boolean {
-  const pattern = /^[a-z]+-[a-z]+-\d{1,2}$/i;
-  return pattern.test(code.trim());
-}
+// 🔑 ADR-0009 Stage 1a (10-20): `generateRoomCode` / `isValidRoomCode` and their word lists are
+// GONE. The `adjective-noun-NN` code was the room id AND its only gate, at ~18 bits; new crews
+// are minted by `mintCrew()` in `@/lib/room-secret`. Display helpers stay: legacy ids live on.
 
 /**
  * Prettify a room code for display
