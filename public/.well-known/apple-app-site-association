@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["L68LFRQVKM.com.peddlenet.festivalchat.ios"],
+        "components": [
+          { "/": "/chat/*", "comment": "Crew invites (ADR-0009). The #s= secret is a fragment: never matched, never sent, passed to the app intact." }
+        ]
+      }
+    ]
+  }
+}
