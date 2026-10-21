@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import QRCode from 'qrcode';
+import { storedSecret } from '@/lib/room-secret';
 import { NetworkUtils } from '@/utils/network-utils';
 import { MobileNetworkDebug } from '@/utils/mobile-network-debug';
 
@@ -116,8 +117,13 @@ export function QRModal({ roomId, roomName, peerId, displayName, isOpen, onClose
     if (queryString) {
       chatUrl += `?${queryString}`;
     }
-    
+    // ⚠️ Logged BEFORE the secret is appended: the console must never hold a crew's secret.
     console.log('🌐 QR URL for mobile access:', chatUrl);
+
+    // 🔑 ADR-0009 Stage 1a: a secret crew's invite carries `#s=` (fragment, never sent to a server),
+    // exactly as the apps' Share crew / QR do, so one invite works in all three.
+    const secret = isTestPage ? null : storedSecret(roomId);
+    if (secret) chatUrl += `#s=${secret}`;
     setFullUrl(chatUrl);
     
     try {
