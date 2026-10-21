@@ -1,16 +1,21 @@
 /**
  * Where a visitor without the app gets it, and whether the browser chat is offered.
  *
- * Set per deployment in Vercel (Project → Settings → Environment Variables). An unset link hides
- * its button rather than rendering a dead one.
+ * The defaults below are the live public links; an env var (Vercel → Project → Settings →
+ * Environment Variables) overrides one per deployment. An empty link hides its button rather
+ * than rendering a dead one.
  *
- * ⚠️ Invite-only links on purpose (no patent filed; public distribution counts as public use).
- * These are tester links, not store listings.
+ * ⚠️ These are PUBLIC tester links (a TestFlight public link; Play open testing to come), and
+ * public distribution is public use. No patent had been filed as of 09-14. Using them was the
+ * user's call (10-20); keep that in view before adding any wider channel.
  */
 export const installLinks = {
-  /** The TestFlight public link (https://testflight.apple.com/join/…). */
-  ios: process.env.NEXT_PUBLIC_TESTFLIGHT_URL || '',
-  /** The Firebase App Distribution tester invite for the Android `testers` group. */
+  /** TestFlight public link (user, 10-20). */
+  ios: process.env.NEXT_PUBLIC_TESTFLIGHT_URL || 'https://testflight.apple.com/join/whKHYPj3',
+  /**
+   * EMPTY on purpose (10-20): the user is applying for Play production access to get an open
+   * testing link. Set NEXT_PUBLIC_ANDROID_INVITE_URL, or fill the default, once it exists.
+   */
   android: process.env.NEXT_PUBLIC_ANDROID_INVITE_URL || '',
 };
 
