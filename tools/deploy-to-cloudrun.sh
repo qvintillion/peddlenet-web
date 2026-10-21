@@ -43,7 +43,11 @@ gcloud services enable containerregistry.googleapis.com
 echo "🏗️ Building container image..."
 gcloud builds submit --tag $IMAGE_NAME .
 
-# Deploy to Cloud Run with anti-cold-start configuration
+# Deploy to Cloud Run
+# COST: min-instances was 1 (anti-cold-start). A pinned warm instance bills
+# 24/7 even with zero traffic — it showed up as "Min Instance CPU" on the bill.
+# Set to 0 for dev/beta. RESTORE TO 1 before a real festival launch if the
+# cold-start delay on first WebSocket connect is unacceptable.
 echo "🚀 Deploying to Cloud Run..."
 gcloud run deploy $SERVICE_NAME \
     --image $IMAGE_NAME \
@@ -53,7 +57,7 @@ gcloud run deploy $SERVICE_NAME \
     --port 8080 \
     --memory 512Mi \
     --cpu 1 \
-    --min-instances 1 \
+    --min-instances 0 \
     --max-instances 10 \
     --set-env-vars NODE_ENV=production \
     --set-env-vars PLATFORM="Google Cloud Run" \
